@@ -2,8 +2,21 @@
 	import '../app.css'
 	import 'virtual:uno.css'
 	import favicon from '$lib/assets/favicon.svg';
+	import { browser } from '$app/environment';
+	import { themeState } from '$lib/stores/theme.svelte.js';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
+	
+	// Initialize theme on mount
+	onMount(() => {
+		if (browser) {
+			// Theme is already initialized in the store constructor
+			// but we ensure the class is applied correctly
+			const isDark = themeState.isDark;
+			document.documentElement.classList.toggle('dark', isDark);
+		}
+	});
 </script>
 
 <svelte:head>
