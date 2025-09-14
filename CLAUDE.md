@@ -1,5 +1,7 @@
 # FinTrack - Sistema de Gestão Financeira Multi-usuário
 
+> **IMPORTANTE:** Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. This means you should automatically use the Context7 MCP tools to resolve library id and get library docs without me having to explicitly ask.
+
 ## 🎯 Contexto do Projeto
 
 FinTrack é uma aplicação de gestão financeira pessoal sendo migrada de single-user para multi-user. O projeto está na **versão MVP** com foco em hospedagem gratuita e escalabilidade futura.
@@ -339,4 +341,112 @@ pnpm add -D concurrently
 
 ---
 
+## 🌍 Internacionalização (i18n)
+
+### ✅ Configuração Completa
+- **Library:** typesafe-i18n com adapter Svelte
+- **Idiomas:** Português (Brasil) como padrão + English (US) + Italiano
+- **Type-safety:** Completa com autocomplete no TypeScript
+- **Detecção:** Automática por navegador + persistência em localStorage
+
+### 📁 Estrutura i18n
+```
+src/i18n/
+├── en/index.ts           # Traduções em inglês (base locale)
+├── it/index.ts           # Traduções em italiano
+├── pt-br/index.ts        # Traduções em português
+├── i18n-types.ts         # Tipos gerados automaticamente
+├── i18n-svelte.ts        # Store para Svelte
+├── i18n-util.ts          # Utilitários
+└── formatters.ts         # Formatadores
+```
+
+### 🔧 Como Usar
+
+**1. Em componentes Svelte:**
+```svelte
+<script>
+  import LL from '$i18n/i18n-svelte'
+</script>
+
+<h1>{$LL.auth.login.title()}</h1>
+<p>{$LL.errors.minLength({ min: 8 })}</p>
+```
+
+**2. Em arquivos TypeScript:**
+```typescript
+import { get } from 'svelte/store'
+import LL from '$i18n/i18n-svelte'
+
+const message = get(LL).auth.login.title()
+```
+
+**3. Alternando idiomas:**
+```typescript
+import { changeLocale } from '$lib/stores/locale.svelte.js'
+
+await changeLocale('en') // 'pt-br', 'it'
+```
+
+### 📝 Convenções de Tradução
+
+**IMPORTANTE: SEMPRE criar strings em todos os idiomas (pt-br, en, it)**
+
+1. **Estrutura hierárquica:**
+   ```typescript
+   auth: {
+     login: {
+       title: 'Login to Account',
+       subtitle: 'Please enter your email and password'
+     }
+   }
+   ```
+
+2. **Parâmetros tipados:**
+   ```typescript
+   minLength: 'Minimum {min:number} characters'
+   ```
+
+3. **Organização por feature:**
+   - `auth.*` - Autenticação
+   - `common.*` - Textos comuns (botões, labels)
+   - `nav.*` - Navegação
+   - `dashboard.*` - Dashboard
+   - `accounts.*` - Contas
+   - `transactions.*` - Transações
+   - `categories.*` - Categorias
+   - `errors.*` - Mensagens de erro
+   - `success.*` - Mensagens de sucesso
+
+### 🛠️ Comandos i18n
+
+```bash
+# Gerar tipos após alterar traduções
+npx typesafe-i18n --no-watch
+
+# Modo watch durante desenvolvimento
+npx typesafe-i18n
+
+# Desenvolvimento com i18n
+pnpm dev
+```
+
+### 🎯 Regras Obrigatórias
+
+1. **Nunca** usar strings hardcoded no código
+2. **Sempre** adicionar traduções em pt-br, en E it
+3. **Sempre** usar tipagem correta para parâmetros
+4. **Sempre** organizar por namespace lógico
+5. **Sempre** testar alternância de idiomas
+
+### 🔗 Componentes i18n
+- `LocaleSwitcher.svelte` - Alternador de idiomas
+- Integrado com `ThemeToggle` na página de login
+- Persistência automática em localStorage
+- Detecção de idioma do navegador
+
 **Próximo passo:** Setup Turso + Auth implementation
+- Sempre que for inserir strings, separar para internacionalização
+- após realizar uma tarefa sempre faça o pnpm check e pnpm lint (se disponível) para verificar falhas
+- após checkar por falhas, peça para que o utilizador verifique por falhas visuais ou no console
+- não rode o comando pnpm dev. O utilizador rodará em terminal separado. Caso necessário, pergunte a ele o que tem no console

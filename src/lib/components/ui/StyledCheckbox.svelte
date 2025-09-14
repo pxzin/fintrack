@@ -16,13 +16,11 @@
 		...restProps
 	}: Props = $props();
 
-	let checkboxElement: HTMLInputElement | undefined = $state();
 </script>
 
 <div class="flex items-center gap-2 {className}">
 	<div class="relative w-5 h-5 border-2 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 cursor-pointer transition-all flex-shrink-0 {checked ? 'bg-blue-500 border-blue-500' : 'hover:border-gray-400'} {disabled ? 'opacity-60 cursor-not-allowed' : ''}">
 		<input
-			bind:this={checkboxElement}
 			bind:checked
 			type="checkbox"
 			{id}

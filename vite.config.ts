@@ -4,12 +4,15 @@ import UnoCSS from 'unocss/vite';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
-	
+
 	return {
 		plugins: [
 			UnoCSS(),
 			sveltekit()
 		],
+		ssr: {
+			noExternal: ['typesafe-i18n']
+		},
 		define: {
 			'process.env.TURSO_DATABASE_URL': JSON.stringify(env.TURSO_DATABASE_URL),
 			'process.env.TURSO_AUTH_TOKEN': JSON.stringify(env.TURSO_AUTH_TOKEN),

@@ -3,7 +3,9 @@
 	import Input from '$lib/components/ui/Input.svelte';
 	import StyledCheckbox from '$lib/components/ui/StyledCheckbox.svelte';
 	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
+	import LocaleSwitcher from '$lib/components/ui/LocaleSwitcher.svelte';
 	import Logo from '$lib/components/ui/Logo.svelte';
+	import LL from '$i18n/i18n-svelte';
 
 	// Form state
 	let email = $state('');
@@ -44,13 +46,14 @@
 </script>
 
 <svelte:head>
-	<title>Login - FinTrack</title>
-	<meta name="description" content="Login to your FinTrack account" />
+	<title>{$LL.auth.login.title()} - FinTrack</title>
+	<meta name="description" content={$LL.auth.login.subtitle()} />
 </svelte:head>
 
 <main class="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 p-8">
-	<!-- Theme toggle -->
-	<div class="absolute top-6 right-6 z-20">
+	<!-- Top controls -->
+	<div class="absolute top-6 right-6 z-20 flex items-center gap-3">
+		<LocaleSwitcher />
 		<ThemeToggle />
 	</div>
 
@@ -64,8 +67,8 @@
 
 			<!-- Header -->
 			<div class="text-center mb-8">
-				<h1 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">Login to Account</h1>
-				<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Please enter your email and password to continue</p>
+				<h1 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">{$LL.auth.login.title()}</h1>
+				<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{$LL.auth.login.subtitle()}</p>
 			</div>
 
 			<!-- Email field -->
@@ -73,8 +76,8 @@
 				<Input
 					bind:value={email}
 					type="email"
-					label="Email address:"
-					placeholder="esteban_schiller@gmail.com"
+					label={$LL.auth.login.emailLabel()}
+					placeholder={$LL.auth.login.emailPlaceholder()}
 					id="email"
 					required
 					disabled={loading}
@@ -84,20 +87,20 @@
 			<!-- Password field -->
 			<div class="mb-6">
 				<div class="flex items-center justify-between mb-2">
-					<label for="password" class="block text-sm font-medium text-gray-900 dark:text-white">Password</label>
+					<label for="password" class="block text-sm font-medium text-gray-900 dark:text-white">{$LL.auth.login.passwordLabel()}</label>
 					<button
 						type="button"
 						class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200"
 						onclick={handleForgotPassword}
 						disabled={loading}
 					>
-						Forget Password?
+						{$LL.auth.login.forgotPassword()}
 					</button>
 				</div>
 				<Input
 					bind:value={password}
 					type="password"
-					placeholder="Enter your password"
+					placeholder={$LL.auth.login.passwordPlaceholder()}
 					id="password"
 					required
 					disabled={loading}
@@ -108,7 +111,7 @@
 			<div class="mb-6">
 				<StyledCheckbox
 					bind:checked={rememberPassword}
-					label="Remember Password"
+					label={$LL.auth.login.rememberPassword()}
 					id="remember"
 					disabled={loading}
 				/>
@@ -124,20 +127,20 @@
 					disabled={loading || !email || !password}
 					{loading}
 				>
-					Sign In
+					{$LL.auth.login.signInButton()}
 				</Button>
 			</div>
 
 			<!-- Create account link -->
 			<div class="text-center flex items-center justify-center gap-1">
-				<span class="text-sm text-gray-600 dark:text-gray-400">Don't have an account?</span>
+				<span class="text-sm text-gray-600 dark:text-gray-400">{$LL.auth.login.noAccount()}</span>
 				<button
 					type="button"
 					class="text-sm text-blue-500 font-medium underline hover:text-blue-600 transition-colors duration-200"
 					onclick={handleCreateAccount}
 					disabled={loading}
 				>
-					Create Account
+					{$LL.auth.login.createAccount()}
 				</button>
 			</div>
 		</form>

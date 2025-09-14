@@ -22,9 +22,7 @@
 		...restProps
 	}: Props = $props();
 
-	let inputElement: HTMLInputElement | undefined = $state();
 	let focused = $state(false);
-	let filled = $derived(value && value.length > 0);
 </script>
 
 <div class="w-full {className}">
@@ -36,7 +34,6 @@
 
 	<div class="relative bg-gray-100 dark:bg-slate-700 rounded-xl border-0 transition-all hover:bg-gray-200 dark:hover:bg-slate-600 {focused ? 'bg-gray-100 dark:bg-slate-700 ring-2 ring-blue-500/20' : ''} {disabled ? 'opacity-60 cursor-not-allowed' : ''}">
 		<input
-			bind:this={inputElement}
 			bind:value
 			{type}
 			{placeholder}
