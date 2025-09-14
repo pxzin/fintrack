@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/Button.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
-	import Checkbox from '$lib/components/ui/Checkbox.svelte';
+	import StyledCheckbox from '$lib/components/ui/StyledCheckbox.svelte';
 	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
+	import Logo from '$lib/components/ui/Logo.svelte';
 
 	// Form state
 	let email = $state('');
@@ -59,6 +60,11 @@
 	<!-- Login form -->
 	<div class="login-form-wrapper">
 		<form class="login-form" onsubmit={handleLogin}>
+			<!-- Logo -->
+			<div class="logo-container">
+				<Logo size="md" />
+			</div>
+			
 			<!-- Header -->
 			<div class="form-header">
 				<h1 class="form-title">Login to Account</h1>
@@ -103,7 +109,7 @@
 
 			<!-- Remember password checkbox -->
 			<div class="form-field">
-				<Checkbox
+				<StyledCheckbox
 					bind:checked={rememberPassword}
 					label="Remember Password"
 					id="remember"
@@ -143,66 +149,145 @@
 
 <style>
 	.login-container {
-		@apply min-h-screen w-full flex items-center justify-center relative overflow-hidden;
+		min-height: 100vh;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+		padding: 2rem;
 	}
 
 	.login-background {
-		@apply absolute inset-0 bg-gradient-to-br from-primary-400 via-primary-500 to-primary-600;
-		@apply dark:from-slate-900 dark:via-slate-800 dark:to-slate-700;
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
 	}
 
 	.login-form-wrapper {
-		@apply relative z-10 w-full max-w-md mx-auto px-6;
+		position: relative;
+		z-index: 10;
 	}
 
 	.login-form {
-		@apply bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8;
-		@apply border border-gray-100 dark:border-slate-700;
+		background: white;
+		border-radius: 24px;
+		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+		padding: 32px;
+		width: 400px;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+	}
+
+	.login-form.dark {
+		background: #1e293b;
+	}
+
+	.logo-container {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 24px;
 	}
 
 	.form-header {
-		@apply text-center mb-8;
+		text-align: center;
+		margin-bottom: 32px;
 	}
 
 	.form-title {
-		@apply text-2xl font-semibold text-gray-900 dark:text-white mb-2;
+		font-size: 24px;
+		font-weight: 600;
+		color: #111827;
+		margin-bottom: 12px;
 	}
 
 	.form-subtitle {
-		@apply text-sm text-gray-600 dark:text-gray-400;
+		font-size: 14px;
+		color: #6b7280;
+		line-height: 1.5;
 	}
 
 	.form-field {
-		@apply mb-6;
+		margin-bottom: 24px;
+	}
+
+	.form-field:last-of-type {
+		margin-bottom: 32px;
 	}
 
 	.password-header {
-		@apply flex items-center justify-between mb-2;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 8px;
 	}
 
 	.input-label {
-		@apply block text-sm font-medium text-gray-700 dark:text-gray-300;
+		display: block;
+		font-size: 14px;
+		font-weight: 500;
+		color: #111827;
+		margin-bottom: 8px;
 	}
 
 	.forgot-password-link {
-		@apply text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors;
-		@apply disabled:opacity-60 disabled:cursor-not-allowed;
+		font-size: 14px;
+		color: #6b7280;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.forgot-password-link:hover {
+		color: #374151;
 	}
 
 	.form-footer {
-		@apply text-center mt-8 flex items-center justify-center gap-1;
+		text-align: center;
+		margin-top: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
 	}
 
 	.footer-text {
-		@apply text-sm text-gray-600 dark:text-gray-400;
+		font-size: 14px;
+		color: #6b7280;
 	}
 
 	.create-account-link {
-		@apply text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors;
-		@apply disabled:opacity-60 disabled:cursor-not-allowed;
+		font-size: 14px;
+		color: #3b82f6;
+		font-weight: 500;
+		text-decoration: underline;
+		transition: color 0.2s;
+	}
+
+	.create-account-link:hover {
+		color: #2563eb;
 	}
 
 	.theme-toggle-wrapper {
-		@apply absolute top-6 right-6 z-20;
+		position: absolute;
+		top: 24px;
+		right: 24px;
+		z-index: 20;
+	}
+
+	/* Custom input styles to match design */
+	:global(.login-form .input-wrapper) {
+		@apply bg-gray-100 dark:bg-slate-700 border-0 rounded-xl;
+	}
+
+	:global(.login-form .input) {
+		@apply bg-transparent text-gray-900 dark:text-gray-100;
+		@apply placeholder-gray-500 dark:placeholder-gray-400;
+	}
+
+	:global(.login-form .checkbox-wrapper) {
+		@apply bg-white dark:bg-slate-700 border-gray-300 dark:border-slate-600 rounded;
+	}
+
+	:global(.login-form .checkbox-wrapper.checked) {
+		@apply bg-blue-500 border-blue-500;
 	}
 </style>
