@@ -30,8 +30,13 @@ FinTrack é uma aplicação de gestão financeira pessoal sendo migrada de singl
 ## 🚀 Comandos Essenciais
 
 ```bash
-# Desenvolvimento
-pnpm dev
+# Desenvolvimento completo (Turso + SvelteKit)
+pnpm dev:full
+
+# Desenvolvimento separado
+pnpm db:start    # Turso com persistência
+pnpm db:dev      # Turso ephemeral  
+pnpm dev         # SvelteKit apenas
 
 # Build & Preview
 pnpm build
@@ -207,11 +212,12 @@ src/
 ```bash
 # Core
 pnpm add @libsql/client lucia @lucia-auth/adapter-sqlite
-pnpm add zod @radix-ui/colors
+pnpm add zod
 
 # Dev
 pnpm add -D @types/better-sqlite3 vitest @testing-library/svelte
 pnpm add -D unocss @unocss/reset @iconify-json/lucide @iconify-json/heroicons
+pnpm add -D concurrently
 ```
 
 ## 🎯 Funcionalidades do Sistema Original

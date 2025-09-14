@@ -62,9 +62,10 @@ pnpm dev
 ```
 
 Visit:
-- **App:** http://localhost:5173/
-- **Component Demo:** http://localhost:5173/demo
-- **UnoCSS Inspector:** http://localhost:5173/__unocss/
+
+- **App:** <http://localhost:5173/>
+- **Component Demo:** <http://localhost:5173/demo>
+- **UnoCSS Inspector:** <http://localhost:5173/__unocss/>
 
 ### Build & Deploy
 
@@ -90,17 +91,19 @@ vercel --prod
 - Comprehensive documentation
 
 ### 🚧 In Progress
+
 - Database schema and Turso integration
 - Authentication system (lucia-auth)
 - Core financial features migration
 - Multi-user architecture
 
 ### 📍 Roadmap
+
 See [MVP_SCOPE.md](./MVP_SCOPE.md) for detailed feature roadmap and [FINTRACK_DOCUMENTATION.md](./FINTRACK_DOCUMENTATION.md) for technical architecture.
 
 ## 📁 Project Structure
 
-```
+```text
 fintrack/
 ├── src/
 │   ├── lib/
@@ -119,6 +122,7 @@ fintrack/
 ## 🤝 Contributing
 
 This project uses:
+
 - **Conventional Commits** for commit messages
 - **Exported States** (Svelte 5 runes) instead of stores
 - **UnoCSS** for styling with design tokens
