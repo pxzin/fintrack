@@ -19,100 +19,29 @@
 	let checkboxElement: HTMLInputElement | undefined = $state();
 </script>
 
-<div class="checkbox-container {className}">
-	<div class="checkbox-wrapper" class:checked class:disabled>
+<div class="flex items-center gap-2 {className}">
+	<div class="relative w-5 h-5 border-2 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 cursor-pointer transition-all flex-shrink-0 {checked ? 'bg-blue-500 border-blue-500' : 'hover:border-gray-400'} {disabled ? 'opacity-60 cursor-not-allowed' : ''}">
 		<input
 			bind:this={checkboxElement}
 			bind:checked
 			type="checkbox"
 			{id}
 			{disabled}
-			class="checkbox-input"
+			class="absolute opacity-0 w-full h-full m-0 cursor-pointer {disabled ? 'cursor-not-allowed' : ''}"
 			{...restProps}
 		/>
 		{#if checked}
-			<div class="checkbox-check">
+			<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
 				<svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M1 4.5L4.5 8L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</div>
 		{/if}
 	</div>
-	
+
 	{#if label}
-		<label for={id} class="checkbox-label" class:disabled>
+		<label for={id} class="text-sm font-medium text-gray-900 dark:text-white cursor-pointer select-none whitespace-nowrap {disabled ? 'opacity-60 cursor-not-allowed' : ''}">
 			{label}
 		</label>
 	{/if}
 </div>
-
-<style>
-	.checkbox-container {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.checkbox-wrapper {
-		position: relative;
-		width: 20px;
-		height: 20px;
-		border: 2px solid #d1d5db;
-		border-radius: 4px;
-		background: white;
-		cursor: pointer;
-		transition: all 0.2s ease;
-		flex-shrink: 0;
-	}
-
-	.checkbox-wrapper:hover {
-		border-color: #9ca3af;
-	}
-
-	.checkbox-wrapper.checked {
-		background: #3b82f6;
-		border-color: #3b82f6;
-	}
-
-	.checkbox-wrapper.disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
-
-	.checkbox-input {
-		position: absolute;
-		opacity: 0;
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		cursor: pointer;
-	}
-
-	.checkbox-input:disabled {
-		cursor: not-allowed;
-	}
-
-	.checkbox-check {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.checkbox-label {
-		font-size: 14px;
-		font-weight: 500;
-		color: #111827;
-		cursor: pointer;
-		user-select: none;
-		white-space: nowrap;
-	}
-
-	.checkbox-label.disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
-</style>

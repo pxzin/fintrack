@@ -48,31 +48,28 @@
 	<meta name="description" content="Login to your FinTrack account" />
 </svelte:head>
 
-<main class="login-container">
-	<!-- Background gradient -->
-	<div class="login-background"></div>
-	
+<main class="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 p-8">
 	<!-- Theme toggle -->
-	<div class="theme-toggle-wrapper">
+	<div class="absolute top-6 right-6 z-20">
 		<ThemeToggle />
 	</div>
-	
+
 	<!-- Login form -->
-	<div class="login-form-wrapper">
-		<form class="login-form" onsubmit={handleLogin}>
+	<div class="relative z-10">
+		<form class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-8 w-100 border border-white/20" onsubmit={handleLogin}>
 			<!-- Logo -->
-			<div class="logo-container">
+			<div class="flex justify-center mb-6">
 				<Logo size="md" />
 			</div>
-			
+
 			<!-- Header -->
-			<div class="form-header">
-				<h1 class="form-title">Login to Account</h1>
-				<p class="form-subtitle">Please enter your email and password to continue</p>
+			<div class="text-center mb-8">
+				<h1 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">Login to Account</h1>
+				<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Please enter your email and password to continue</p>
 			</div>
 
 			<!-- Email field -->
-			<div class="form-field">
+			<div class="mb-6">
 				<Input
 					bind:value={email}
 					type="email"
@@ -85,12 +82,12 @@
 			</div>
 
 			<!-- Password field -->
-			<div class="form-field">
-				<div class="password-header">
-					<label for="password" class="input-label">Password</label>
+			<div class="mb-6">
+				<div class="flex items-center justify-between mb-2">
+					<label for="password" class="block text-sm font-medium text-gray-900 dark:text-white">Password</label>
 					<button
 						type="button"
-						class="forgot-password-link"
+						class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200"
 						onclick={handleForgotPassword}
 						disabled={loading}
 					>
@@ -108,7 +105,7 @@
 			</div>
 
 			<!-- Remember password checkbox -->
-			<div class="form-field">
+			<div class="mb-6">
 				<StyledCheckbox
 					bind:checked={rememberPassword}
 					label="Remember Password"
@@ -118,7 +115,7 @@
 			</div>
 
 			<!-- Submit button -->
-			<div class="form-field">
+			<div class="mb-8">
 				<Button
 					type="submit"
 					variant="primary"
@@ -132,11 +129,11 @@
 			</div>
 
 			<!-- Create account link -->
-			<div class="form-footer">
-				<span class="footer-text">Don't have an account?</span>
+			<div class="text-center flex items-center justify-center gap-1">
+				<span class="text-sm text-gray-600 dark:text-gray-400">Don't have an account?</span>
 				<button
 					type="button"
-					class="create-account-link"
+					class="text-sm text-blue-500 font-medium underline hover:text-blue-600 transition-colors duration-200"
 					onclick={handleCreateAccount}
 					disabled={loading}
 				>
@@ -146,148 +143,3 @@
 		</form>
 	</div>
 </main>
-
-<style>
-	.login-container {
-		min-height: 100vh;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-		padding: 2rem;
-	}
-
-	.login-background {
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-	}
-
-	.login-form-wrapper {
-		position: relative;
-		z-index: 10;
-	}
-
-	.login-form {
-		background: white;
-		border-radius: 24px;
-		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-		padding: 32px;
-		width: 400px;
-		border: 1px solid rgba(255, 255, 255, 0.2);
-	}
-
-	.login-form.dark {
-		background: #1e293b;
-	}
-
-	.logo-container {
-		display: flex;
-		justify-content: center;
-		margin-bottom: 24px;
-	}
-
-	.form-header {
-		text-align: center;
-		margin-bottom: 32px;
-	}
-
-	.form-title {
-		font-size: 24px;
-		font-weight: 600;
-		color: #111827;
-		margin-bottom: 12px;
-	}
-
-	.form-subtitle {
-		font-size: 14px;
-		color: #6b7280;
-		line-height: 1.5;
-	}
-
-	.form-field {
-		margin-bottom: 24px;
-	}
-
-	.form-field:last-of-type {
-		margin-bottom: 32px;
-	}
-
-	.password-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 8px;
-	}
-
-	.input-label {
-		display: block;
-		font-size: 14px;
-		font-weight: 500;
-		color: #111827;
-		margin-bottom: 8px;
-	}
-
-	.forgot-password-link {
-		font-size: 14px;
-		color: #6b7280;
-		text-decoration: none;
-		transition: color 0.2s;
-	}
-
-	.forgot-password-link:hover {
-		color: #374151;
-	}
-
-	.form-footer {
-		text-align: center;
-		margin-top: 24px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 4px;
-	}
-
-	.footer-text {
-		font-size: 14px;
-		color: #6b7280;
-	}
-
-	.create-account-link {
-		font-size: 14px;
-		color: #3b82f6;
-		font-weight: 500;
-		text-decoration: underline;
-		transition: color 0.2s;
-	}
-
-	.create-account-link:hover {
-		color: #2563eb;
-	}
-
-	.theme-toggle-wrapper {
-		position: absolute;
-		top: 24px;
-		right: 24px;
-		z-index: 20;
-	}
-
-	/* Custom input styles to match design */
-	:global(.login-form .input-wrapper) {
-		@apply bg-gray-100 dark:bg-slate-700 border-0 rounded-xl;
-	}
-
-	:global(.login-form .input) {
-		@apply bg-transparent text-gray-900 dark:text-gray-100;
-		@apply placeholder-gray-500 dark:placeholder-gray-400;
-	}
-
-	:global(.login-form .checkbox-wrapper) {
-		@apply bg-white dark:bg-slate-700 border-gray-300 dark:border-slate-600 rounded;
-	}
-
-	:global(.login-form .checkbox-wrapper.checked) {
-		@apply bg-blue-500 border-blue-500;
-	}
-</style>

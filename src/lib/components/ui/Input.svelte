@@ -27,14 +27,14 @@
 	let filled = $derived(value && value.length > 0);
 </script>
 
-<div class="input-field {className}">
+<div class="w-full {className}">
 	{#if label}
-		<label for={id} class="input-label">
+		<label for={id} class="block text-sm font-medium text-gray-900 dark:text-white mb-2">
 			{label}
 		</label>
 	{/if}
-	
-	<div class="input-wrapper" class:focused class:filled class:disabled>
+
+	<div class="relative bg-gray-100 dark:bg-slate-700 rounded-xl border-0 transition-all hover:bg-gray-200 dark:hover:bg-slate-600 {focused ? 'bg-gray-100 dark:bg-slate-700 ring-2 ring-blue-500/20' : ''} {disabled ? 'opacity-60 cursor-not-allowed' : ''}">
 		<input
 			bind:this={inputElement}
 			bind:value
@@ -43,65 +43,10 @@
 			{id}
 			{required}
 			{disabled}
-			class="input"
+			class="w-full px-4 py-3 bg-transparent text-gray-900 dark:text-gray-100 border-0 rounded-xl outline-none text-sm placeholder-gray-500 dark:placeholder-gray-400 {disabled ? 'cursor-not-allowed' : ''}"
 			onfocus={() => focused = true}
 			onblur={() => focused = false}
 			{...restProps}
 		/>
 	</div>
 </div>
-
-<style>
-	.input-field {
-		width: 100%;
-	}
-
-	.input-label {
-		display: block;
-		font-size: 14px;
-		font-weight: 500;
-		color: #111827;
-		margin-bottom: 8px;
-	}
-
-	.input-wrapper {
-		position: relative;
-		background: #f3f4f6;
-		border-radius: 12px;
-		border: 0;
-		transition: all 0.2s;
-	}
-
-	.input-wrapper:hover {
-		background: #e5e7eb;
-	}
-
-	.input-wrapper.focused {
-		background: #f3f4f6;
-		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-	}
-
-	.input-wrapper.disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
-
-	.input {
-		width: 100%;
-		padding: 12px 16px;
-		background: transparent;
-		color: #111827;
-		border: 0;
-		border-radius: 12px;
-		outline: none;
-		font-size: 14px;
-	}
-
-	.input::placeholder {
-		color: #9ca3af;
-	}
-
-	.input:disabled {
-		cursor: not-allowed;
-	}
-</style>
