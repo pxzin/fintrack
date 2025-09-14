@@ -1,4 +1,6 @@
-const it = {
+import type { Translation } from '../i18n-types'
+
+const it: Translation = {
 	// === AUTH ===
 	auth: {
 		login: {
@@ -139,8 +141,8 @@ const it = {
 	errors: {
 		required: 'Questo campo è obbligatorio',
 		invalidEmail: 'Email non valida',
-		minLength: ({ min }: { min: number }) => `Minimo ${min} caratteri`,
-		maxLength: ({ max }: { max: number }) => `Massimo ${max} caratteri`,
+		minLength: 'Minimo {min} caratteri',
+		maxLength: 'Massimo {max} caratteri',
 		invalidAmount: 'Importo non valido',
 		networkError: 'Errore di rete',
 		serverError: 'Errore del server',

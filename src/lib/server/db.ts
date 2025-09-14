@@ -1,4 +1,4 @@
-import { createClient, type Client } from '@libsql/client'
+import { createClient, type Client, type InArgs, type InValue } from '@libsql/client'
 import { dev } from '$app/environment'
 
 // Environment variables validation
@@ -25,7 +25,7 @@ export const turso: Client = createClient({
  * @param params Query parameters
  * @returns Query result
  */
-export async function executeQuery(sql: string, params: unknown[] = []) {
+export async function executeQuery(sql: string, params: InArgs = []) {
 	try {
 		const result = await turso.execute({
 			sql,
@@ -44,7 +44,7 @@ export async function executeQuery(sql: string, params: unknown[] = []) {
  * @returns Transaction result
  */
 export async function executeTransaction(
-	queries: Array<{ sql: string; params?: unknown[] }>
+	queries: Array<{ sql: string; params?: InArgs }>
 ) {
 	try {
 		const transaction = await turso.batch(

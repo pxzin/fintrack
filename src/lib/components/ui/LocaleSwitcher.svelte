@@ -4,16 +4,9 @@
 
 	interface Props {
 		class?: string;
-		size?: 'sm' | 'md' | 'lg';
 	}
 
-	let { class: className = '', size = 'md' }: Props = $props();
-
-	const sizeClasses = {
-		sm: 'w-6 h-6 text-xs',
-		md: 'w-8 h-8 text-sm',
-		lg: 'w-10 h-10 text-base'
-	};
+	let { class: className = '' }: Props = $props();
 
 	const currentLocale = $derived(getLocale());
 

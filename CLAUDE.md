@@ -450,3 +450,4 @@ pnpm dev
 - após realizar uma tarefa sempre faça o pnpm check e pnpm lint (se disponível) para verificar falhas
 - após checkar por falhas, peça para que o utilizador verifique por falhas visuais ou no console
 - não rode o comando pnpm dev. O utilizador rodará em terminal separado. Caso necessário, pergunte a ele o que tem no console
+- sempre consulte context7 para o contexto atualizado do svelte

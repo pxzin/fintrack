@@ -1,4 +1,6 @@
-const en = {
+import type { BaseTranslation } from '../i18n-types'
+
+const en: BaseTranslation = {
 	// === AUTH ===
 	auth: {
 		login: {
@@ -139,8 +141,8 @@ const en = {
 	errors: {
 		required: 'This field is required',
 		invalidEmail: 'Invalid email',
-		minLength: ({ min }: { min: number }) => `Minimum ${min} characters`,
-		maxLength: ({ max }: { max: number }) => `Maximum ${max} characters`,
+		minLength: 'Minimum {min} characters',
+		maxLength: 'Maximum {max} characters',
 		invalidAmount: 'Invalid amount',
 		networkError: 'Network error',
 		serverError: 'Server error',

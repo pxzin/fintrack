@@ -1,4 +1,6 @@
-const ptBr = {
+import type { Translation } from '../i18n-types'
+
+const ptBr: Translation = {
 	// === AUTH ===
 	auth: {
 		login: {
@@ -139,8 +141,8 @@ const ptBr = {
 	errors: {
 		required: 'Este campo é obrigatório',
 		invalidEmail: 'Email inválido',
-		minLength: ({ min }: { min: number }) => `Mínimo de ${min} caracteres`,
-		maxLength: ({ max }: { max: number }) => `Máximo de ${max} caracteres`,
+		minLength: 'Mínimo de {min} caracteres',
+		maxLength: 'Máximo de {max} caracteres',
 		invalidAmount: 'Valor inválido',
 		networkError: 'Erro de conexão',
 		serverError: 'Erro do servidor',

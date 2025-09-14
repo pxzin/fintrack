@@ -15,8 +15,294 @@ export type Translation = RootTranslation
 
 export type Translations = RootTranslation
 
-type RootTranslation = {}
+type RootTranslation = {
+	auth: {
+		login: {
+			title: string
+			subtitle: string
+			emailLabel: string
+			emailPlaceholder: string
+			passwordLabel: string
+			passwordPlaceholder: string
+			forgotPassword: string
+			rememberPassword: string
+			signInButton: string
+			noAccount: string
+			createAccount: string
+		}
+		register: {
+			title: string
+			subtitle: string
+			nameLabel: string
+			namePlaceholder: string
+			signUpButton: string
+			hasAccount: string
+			signIn: string
+		}
+		logout: string
+	}
+	common: {
+		loading: string
+		save: string
+		cancel: string
+		delete: string
+		edit: string
+		add: string
+		close: string
+		confirm: string
+		yes: string
+		no: string
+		search: string
+		filter: string
+		clear: string
+		back: string
+		next: string
+		previous: string
+		finish: string
+		required: string
+		optional: string
+	}
+	nav: {
+		dashboard: string
+		accounts: string
+		transactions: string
+		categories: string
+		projections: string
+		settings: string
+	}
+	dashboard: {
+		title: string
+		monthSummary: string
+		income: string
+		expenses: string
+		balance: string
+		recentTransactions: string
+		accountBalances: string
+	}
+	accounts: {
+		title: string
+		addAccount: string
+		accountName: string
+		accountType: string
+		initialBalance: string
+		currentBalance: string
+		types: {
+			checking: string
+			savings: string
+			creditCard: string
+			investment: string
+			business: string
+			cash: string
+			crypto: string
+			loan: string
+			pension: string
+			other: string
+		}
+	}
+	transactions: {
+		title: string
+		addTransaction: string
+		description: string
+		amount: string
+		date: string
+		category: string
+		account: string
+		type: string
+		types: {
+			income: string
+			expense: string
+		}
+		isRecurrent: string
+		recurrenceInterval: string
+		intervals: {
+			monthly: string
+			yearly: string
+		}
+	}
+	categories: {
+		title: string
+		addCategory: string
+		categoryName: string
+		categoryIcon: string
+		types: {
+			income: string
+			expense: string
+		}
+	}
+	projections: {
+		title: string
+		next6Months: string
+		expectedIncome: string
+		expectedExpenses: string
+		projectedBalance: string
+	}
+	errors: {
+		required: string
+		invalidEmail: string
+		minLength: string
+		maxLength: string
+		invalidAmount: string
+		networkError: string
+		serverError: string
+		unauthorized: string
+		notFound: string
+	}
+	success: {
+		accountCreated: string
+		accountUpdated: string
+		accountDeleted: string
+		transactionCreated: string
+		transactionUpdated: string
+		transactionDeleted: string
+		categoryCreated: string
+		categoryUpdated: string
+		categoryDeleted: string
+	}
+}
 
-export type TranslationFunctions = {}
+export type TranslationFunctions = {
+	auth: {
+		login: {
+			title: () => string
+			subtitle: () => string
+			emailLabel: () => string
+			emailPlaceholder: () => string
+			passwordLabel: () => string
+			passwordPlaceholder: () => string
+			forgotPassword: () => string
+			rememberPassword: () => string
+			signInButton: () => string
+			noAccount: () => string
+			createAccount: () => string
+		}
+		register: {
+			title: () => string
+			subtitle: () => string
+			nameLabel: () => string
+			namePlaceholder: () => string
+			signUpButton: () => string
+			hasAccount: () => string
+			signIn: () => string
+		}
+		logout: () => string
+	}
+	common: {
+		loading: () => string
+		save: () => string
+		cancel: () => string
+		delete: () => string
+		edit: () => string
+		add: () => string
+		close: () => string
+		confirm: () => string
+		yes: () => string
+		no: () => string
+		search: () => string
+		filter: () => string
+		clear: () => string
+		back: () => string
+		next: () => string
+		previous: () => string
+		finish: () => string
+		required: () => string
+		optional: () => string
+	}
+	nav: {
+		dashboard: () => string
+		accounts: () => string
+		transactions: () => string
+		categories: () => string
+		projections: () => string
+		settings: () => string
+	}
+	dashboard: {
+		title: () => string
+		monthSummary: () => string
+		income: () => string
+		expenses: () => string
+		balance: () => string
+		recentTransactions: () => string
+		accountBalances: () => string
+	}
+	accounts: {
+		title: () => string
+		addAccount: () => string
+		accountName: () => string
+		accountType: () => string
+		initialBalance: () => string
+		currentBalance: () => string
+		types: {
+			checking: () => string
+			savings: () => string
+			creditCard: () => string
+			investment: () => string
+			business: () => string
+			cash: () => string
+			crypto: () => string
+			loan: () => string
+			pension: () => string
+			other: () => string
+		}
+	}
+	transactions: {
+		title: () => string
+		addTransaction: () => string
+		description: () => string
+		amount: () => string
+		date: () => string
+		category: () => string
+		account: () => string
+		type: () => string
+		types: {
+			income: () => string
+			expense: () => string
+		}
+		isRecurrent: () => string
+		recurrenceInterval: () => string
+		intervals: {
+			monthly: () => string
+			yearly: () => string
+		}
+	}
+	categories: {
+		title: () => string
+		addCategory: () => string
+		categoryName: () => string
+		categoryIcon: () => string
+		types: {
+			income: () => string
+			expense: () => string
+		}
+	}
+	projections: {
+		title: () => string
+		next6Months: () => string
+		expectedIncome: () => string
+		expectedExpenses: () => string
+		projectedBalance: () => string
+	}
+	errors: {
+		required: () => string
+		invalidEmail: () => string
+		minLength: () => string
+		maxLength: () => string
+		invalidAmount: () => string
+		networkError: () => string
+		serverError: () => string
+		unauthorized: () => string
+		notFound: () => string
+	}
+	success: {
+		accountCreated: () => string
+		accountUpdated: () => string
+		accountDeleted: () => string
+		transactionCreated: () => string
+		transactionUpdated: () => string
+		transactionDeleted: () => string
+		categoryCreated: () => string
+		categoryUpdated: () => string
+		categoryDeleted: () => string
+	}
+}
 
 export type Formatters = {}
