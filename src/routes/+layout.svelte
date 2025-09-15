@@ -22,6 +22,7 @@
 		}
 	});
 	import DevStoreInspector from '$lib/components/DevStoreInspector.svelte';
+	import DevDbInspector from '$lib/components/DevDbInspector.svelte';
 </script>
 
 <svelte:head>
@@ -29,4 +30,5 @@
 </svelte:head>
 
 <DevStoreInspector />
+<DevDbInspector />
 {@render children?.()}
