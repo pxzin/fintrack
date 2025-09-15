@@ -1,6 +1,4 @@
-import type { Translation } from '../i18n-types';
-
-const ptBr: Translation = {
+const ptBr = {
 	// === AUTH ===
 	auth: {
 		login: {
@@ -21,9 +19,34 @@ const ptBr: Translation = {
 			subtitle: 'Preencha os dados para criar sua conta',
 			nameLabel: 'Nome completo:',
 			namePlaceholder: 'Digite seu nome completo',
+			emailLabel: 'Endereço de email:',
+			emailPlaceholder: 'seu.email@exemplo.com',
+			passwordLabel: 'Senha:',
+			passwordPlaceholder: 'Digite uma senha segura',
+			confirmPasswordLabel: 'Confirmar senha:',
+			confirmPasswordPlaceholder: 'Digite a senha novamente',
 			signUpButton: 'Criar conta',
 			hasAccount: 'Já tem uma conta?',
 			signIn: 'Entrar'
+		},
+		password: {
+			strength: {
+				title: 'Força da senha',
+				levels: {
+					veryWeak: 'Muito fraca',
+					weak: 'Fraca',
+					moderate: 'Moderada',
+					strong: 'Forte',
+					veryStrong: 'Muito forte'
+				}
+			},
+			feedback: {
+				minLength: 'Use pelo menos 8 caracteres',
+				mixedCase: 'Use letras maiúsculas e minúsculas',
+				includeNumbers: 'Inclua números',
+				includeSymbols: 'Inclua símbolos (!@#$%)',
+				avoidCommon: 'Evite sequências comuns'
+			}
 		},
 		logout: 'Sair'
 	},
@@ -147,7 +170,9 @@ const ptBr: Translation = {
 		networkError: 'Erro de conexão',
 		serverError: 'Erro do servidor',
 		unauthorized: 'Não autorizado',
-		notFound: 'Não encontrado'
+		notFound: 'Não encontrado',
+		passwordMismatch: 'As senhas não coincidem',
+		weakPassword: 'Senha muito fraca'
 	},
 
 	// === SUCCESS MESSAGES ===
@@ -162,6 +187,6 @@ const ptBr: Translation = {
 		categoryUpdated: 'Categoria atualizada com sucesso',
 		categoryDeleted: 'Categoria excluída com sucesso'
 	}
-};
+} as const;
 
 export default ptBr;

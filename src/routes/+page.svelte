@@ -29,8 +29,13 @@
 					Login
 				</Button>
 
-				<Button variant="outline" size="lg" class="!border-white/30 !text-white hover:!bg-white/10">
-					Demo
+				<Button
+					variant="outline"
+					size="lg"
+					class="!border-white/30 !text-white hover:!bg-white/10"
+					onclick={() => (window.location.href = '/register')}
+				>
+					Sign Up
 				</Button>
 			</div>
 
@@ -42,6 +47,11 @@
 						href="/login"
 						data-sveltekit-preload-data
 						class="text-white/70 hover:text-white underline">Login Page</a
+					>
+					<a
+						href="/register"
+						data-sveltekit-preload-data
+						class="text-white/70 hover:text-white underline">Register Page</a
 					>
 					<a
 						href="/demo"

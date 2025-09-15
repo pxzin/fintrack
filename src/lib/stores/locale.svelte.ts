@@ -1,5 +1,4 @@
 import { browser } from '$app/environment';
-import { loadLocaleAsync } from '$i18n/i18n-util.async';
 import { setLocale } from '$i18n/i18n-svelte';
 import type { Locales } from '$i18n/i18n-types';
 
@@ -36,11 +35,10 @@ export function detectLocale(): Locales {
 }
 
 // Initialize locale
-export async function initLocale(locale?: Locales) {
+export function initLocale(locale?: Locales) {
 	const targetLocale = locale || detectLocale();
 
 	try {
-		await loadLocaleAsync(targetLocale);
 		setLocale(targetLocale);
 		currentLocale.value = targetLocale;
 
@@ -54,7 +52,6 @@ export async function initLocale(locale?: Locales) {
 		console.warn(`Failed to load locale ${targetLocale}, falling back to ${defaultLocale}`, error);
 
 		// Fallback to default
-		await loadLocaleAsync(defaultLocale);
 		setLocale(defaultLocale);
 		currentLocale.value = defaultLocale;
 
@@ -67,14 +64,13 @@ export async function initLocale(locale?: Locales) {
 }
 
 // Change locale
-export async function changeLocale(newLocale: Locales) {
+export function changeLocale(newLocale: Locales) {
 	if (!supportedLocales.includes(newLocale)) {
 		console.warn(`Unsupported locale: ${newLocale}`);
 		return false;
 	}
 
 	try {
-		await loadLocaleAsync(newLocale);
 		setLocale(newLocale);
 		currentLocale.value = newLocale;
 
@@ -99,8 +95,7 @@ export function getLocaleDisplayName(locale: Locales): string {
 	const names: Record<Locales, string> = {
 		en: 'English',
 		it: 'Italiano',
-		'pt-br': 'Português (Brasil)',
-		'en-us': 'English (US)'
+		'pt-br': 'Português (Brasil)'
 	};
 	return names[locale] || locale;
 }
@@ -112,8 +107,7 @@ export function formatCurrency(amount: number, locale?: Locales): string {
 	const formatOptions: Record<Locales, { locale: string; currency: string }> = {
 		en: { locale: 'en-US', currency: 'USD' },
 		it: { locale: 'it-IT', currency: 'EUR' },
-		'pt-br': { locale: 'pt-BR', currency: 'BRL' },
-		'en-us': { locale: 'en-US', currency: 'USD' }
+		'pt-br': { locale: 'pt-BR', currency: 'BRL' }
 	};
 
 	const options = formatOptions[targetLocale as Locales] || formatOptions['pt-br'];
@@ -131,8 +125,7 @@ export function formatDate(date: Date, locale?: Locales): string {
 	const localeMap: Record<Locales, string> = {
 		en: 'en-US',
 		it: 'it-IT',
-		'pt-br': 'pt-BR',
-		'en-us': 'en-US'
+		'pt-br': 'pt-BR'
 	};
 
 	const browserLocale = localeMap[targetLocale as Locales] || 'pt-BR';

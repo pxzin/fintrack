@@ -15,9 +15,9 @@
 
 	const currentLocale = $derived(getLocale());
 
-	async function handleLocaleChange(newLocale: Locales) {
+	function handleLocaleChange(newLocale: Locales) {
 		if (newLocale !== currentLocale) {
-			await changeLocale(newLocale);
+			changeLocale(newLocale);
 		}
 	}
 
@@ -26,8 +26,7 @@
 		const flags: Record<Locales, string> = {
 			en: '🇺🇸',
 			it: '🇮🇹',
-			'pt-br': '🇧🇷',
-			'en-us': '🇺🇸'
+			'pt-br': '🇧🇷'
 		};
 		return flags[locale] || '🌐';
 	}
@@ -37,8 +36,7 @@
 		const codes: Record<Locales, string> = {
 			en: 'EN',
 			it: 'IT',
-			'pt-br': 'PT',
-			'en-us': 'EN'
+			'pt-br': 'PT'
 		};
 		return codes[locale] || locale.toUpperCase();
 	}

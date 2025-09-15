@@ -9,6 +9,8 @@
 		required?: boolean;
 		disabled?: boolean;
 		class?: string;
+		autocomplete?: HTMLInputElement['autocomplete'];
+		'data-form-type'?: string;
 	}
 
 	let {
@@ -21,6 +23,8 @@
 		required = false,
 		disabled = false,
 		class: className = '',
+		autocomplete,
+		'data-form-type': dataFormType,
 		...restProps
 	}: Props = $props();
 
@@ -47,6 +51,8 @@
 			{name}
 			{required}
 			{disabled}
+			{autocomplete}
+			data-form-type={dataFormType}
 			class="w-full px-4 py-3 bg-transparent text-gray-900 dark:text-gray-100 border-0 rounded-xl outline-none text-sm placeholder-gray-500 dark:placeholder-gray-400 {disabled
 				? 'cursor-not-allowed'
 				: ''}"
