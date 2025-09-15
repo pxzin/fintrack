@@ -23,7 +23,8 @@
 		<!-- Main Content -->
 		<main
 			class="flex-1 transition-all duration-300 ease-in-out"
-			class:ml-64={layoutState.sidebarOpen}
+			class:ml-64={layoutState.sidebarOpen && !layoutState.sidebarCollapsed}
+			class:ml-16={layoutState.sidebarOpen && layoutState.sidebarCollapsed}
 			class:ml-0={!layoutState.sidebarOpen}
 		>
 			<div class="p-6 pt-20">
