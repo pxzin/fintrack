@@ -1,5 +1,13 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import {
+	createUser,
+	getUserByEmail,
+	createSession,
+	createEmailVerificationToken
+} from '$lib/server/auth';
+import { setSessionCookie } from '$lib/server/session';
+import { calculatePasswordStrength } from '$lib/utils/password-strength';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	// Redirect if already authenticated
@@ -9,7 +17,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async (event) => {
+		const { request } = event;
 		const data = await request.formData();
 		const fullName = data.get('fullName')?.toString();
 		const email = data.get('email')?.toString();
@@ -49,12 +58,61 @@ export const actions: Actions = {
 			});
 		}
 
-		// TODO: Implement user registration with lucia-auth
-		// For now, just return an error indicating the feature is not implemented
-		return fail(400, {
-			error: 'User registration will be implemented with authentication system',
-			fullName,
-			email
-		});
+		// Validate password strength
+		const passwordStrength = calculatePasswordStrength(password);
+		if (passwordStrength.score < 3) {
+			return fail(400, {
+				error: 'Password is too weak. Please choose a stronger password.',
+				fullName,
+				email
+			});
+		}
+
+		try {
+			// Check if user already exists
+			const existingUser = await getUserByEmail(email);
+
+			// Security: Always return success even if user exists to prevent email enumeration
+			if (existingUser) {
+				// If user exists, we still return success but don't actually create anything
+				// This prevents attackers from knowing which emails are registered
+				console.log(`Registration attempt for existing email: ${email}`);
+				throw redirect(302, '/verify-email?email=' + encodeURIComponent(email));
+			}
+
+			// Create new user
+			const user = await createUser(email, password, fullName);
+
+			// Create email verification token
+			const verificationToken = await createEmailVerificationToken(user.id, email);
+
+			// TODO: Send verification email here
+			console.log(`Verification token for ${email}: ${verificationToken}`);
+			console.log(`Verification URL: ${new URL('/verify-email/' + verificationToken, 'http://localhost:5173').toString()}`);
+
+			// Create session but don't log user in until email is verified
+			// We still create the session so we can track the user through the verification process
+			const session = await createSession(user.id);
+			setSessionCookie(event, session.id, session.expires_at);
+
+			// Redirect to email verification page
+			throw redirect(302, '/verify-email?email=' + encodeURIComponent(email));
+
+		} catch (error) {
+			// Se for redirect, rethrow por propriedades
+			if (
+				(error as { status?: number; location?: string })?.status === 302 &&
+				(error as { status?: number; location?: string })?.location
+			) {
+				throw error;
+			}
+			// Só loga erro real
+			console.error('Registration error:', error);
+			return fail(500, {
+				error: 'An error occurred during registration. Please try again.',
+				fullName,
+				email
+			});
+		}
 	}
 };

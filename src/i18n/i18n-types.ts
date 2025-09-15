@@ -51,6 +51,15 @@ export interface BaseTranslation {
 				avoidCommon: string;
 			};
 		};
+		emailVerification: {
+			title: string;
+			subtitle: string;
+			checkEmail: string;
+			instructions: string;
+			didNotReceive: string;
+			resendEmail: string;
+			backToLogin: string;
+		};
 		logout: string;
 	};
 	common: {

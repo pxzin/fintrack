@@ -81,3 +81,28 @@ export async function closeConnection() {
 		console.error('Error closing database connection:', error);
 	}
 }
+
+// Database types for authentication
+export interface User {
+	id: string;
+	email: string;
+	password_hash: string;
+	full_name: string;
+	email_verified: number;
+	created_at: string;
+	updated_at: string;
+}
+
+export interface Session {
+	id: string;
+	user_id: string;
+	expires_at: number;
+}
+
+export interface EmailVerificationToken {
+	id: string;
+	user_id: string;
+	email: string;
+	expires_at: number;
+	created_at: string;
+}

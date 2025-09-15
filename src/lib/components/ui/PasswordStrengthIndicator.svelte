@@ -15,7 +15,7 @@
 	const strength: PasswordStrength = $derived(calculatePasswordStrength(password));
 
 	// Calculate width percentage for the progress bar
-	let widthPercentage = $derived(Math.max(8, (strength.score / 5) * 100));
+	const widthPercentage = $derived(Math.max(8, (strength.score / 5) * 100));
 
 	// Function to get color for the progress bar
 	function getBarColor(level: PasswordStrength['level']): string {

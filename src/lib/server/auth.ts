@@ -7,6 +7,7 @@ export interface User {
 	id: string;
 	email: string;
 	full_name: string;
+	email_verified: number;
 	created_at: Date;
 	updated_at: Date;
 }
@@ -52,14 +53,15 @@ export async function createUser(email: string, password: string, fullName: stri
 	const now = Math.floor(Date.now() / 1000);
 
 	await executeQuery(
-		'INSERT INTO users (id, email, password_hash, full_name, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
-		[id, email, passwordHash, fullName, now, now] as InArgs
+		'INSERT INTO users (id, email, password_hash, full_name, email_verified, created_at, updated_at) VALUES (?, ?, ?, ?, 0, ?, ?)',
+		[id, email.toLowerCase(), passwordHash, fullName, now, now] as InArgs
 	);
 
 	return {
 		id,
-		email,
+		email: email.toLowerCase(),
 		full_name: fullName,
+		email_verified: 0,
 		created_at: new Date(now * 1000),
 		updated_at: new Date(now * 1000)
 	};
@@ -67,8 +69,8 @@ export async function createUser(email: string, password: string, fullName: stri
 
 export async function getUserByEmail(email: string): Promise<User | null> {
 	const result = await executeQuery(
-		'SELECT id, email, full_name, created_at, updated_at FROM users WHERE email = ?',
-		[email] as InArgs
+		'SELECT id, email, full_name, email_verified, created_at, updated_at FROM users WHERE email = ?',
+		[email.toLowerCase()] as InArgs
 	);
 
 	if (result.rows.length === 0) {
@@ -80,14 +82,15 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 		id: row[0] as string,
 		email: row[1] as string,
 		full_name: row[2] as string,
-		created_at: new Date((row[3] as number) * 1000),
-		updated_at: new Date((row[4] as number) * 1000)
+		email_verified: row[3] as number,
+		created_at: new Date((row[4] as number) * 1000),
+		updated_at: new Date((row[5] as number) * 1000)
 	};
 }
 
 export async function getUserById(id: string): Promise<User | null> {
 	const result = await executeQuery(
-		'SELECT id, email, full_name, created_at, updated_at FROM users WHERE id = ?',
+		'SELECT id, email, full_name, email_verified, created_at, updated_at FROM users WHERE id = ?',
 		[id] as InArgs
 	);
 
@@ -100,15 +103,16 @@ export async function getUserById(id: string): Promise<User | null> {
 		id: row[0] as string,
 		email: row[1] as string,
 		full_name: row[2] as string,
-		created_at: new Date((row[3] as number) * 1000),
-		updated_at: new Date((row[4] as number) * 1000)
+		email_verified: row[3] as number,
+		created_at: new Date((row[4] as number) * 1000),
+		updated_at: new Date((row[5] as number) * 1000)
 	};
 }
 
 export async function authenticateUser(email: string, password: string): Promise<User | null> {
 	const result = await executeQuery(
-		'SELECT id, email, password_hash, full_name, created_at, updated_at FROM users WHERE email = ?',
-		[email] as InArgs
+		'SELECT id, email, password_hash, full_name, email_verified, created_at, updated_at FROM users WHERE email = ?',
+		[email.toLowerCase()] as InArgs
 	);
 
 	if (result.rows.length === 0) {
@@ -127,8 +131,9 @@ export async function authenticateUser(email: string, password: string): Promise
 		id: row[0] as string,
 		email: row[1] as string,
 		full_name: row[3] as string,
-		created_at: new Date((row[4] as number) * 1000),
-		updated_at: new Date((row[5] as number) * 1000)
+		email_verified: row[4] as number,
+		created_at: new Date((row[5] as number) * 1000),
+		updated_at: new Date((row[6] as number) * 1000)
 	};
 }
 
@@ -160,7 +165,7 @@ export async function validateSession(sessionId: string): Promise<SessionWithUse
 	const result = await executeQuery(
 		`SELECT
 			s.id, s.user_id, s.expires_at,
-			u.id, u.email, u.full_name, u.created_at, u.updated_at
+			u.id, u.email, u.full_name, u.email_verified, u.created_at, u.updated_at
 		FROM sessions s
 		JOIN users u ON s.user_id = u.id
 		WHERE s.id = ? AND s.expires_at > ?`,
@@ -181,8 +186,9 @@ export async function validateSession(sessionId: string): Promise<SessionWithUse
 			id: row[3] as string,
 			email: row[4] as string,
 			full_name: row[5] as string,
-			created_at: new Date((row[6] as number) * 1000),
-			updated_at: new Date((row[7] as number) * 1000)
+			email_verified: row[6] as number,
+			created_at: new Date((row[7] as number) * 1000),
+			updated_at: new Date((row[8] as number) * 1000)
 		}
 	};
 }
@@ -193,4 +199,73 @@ export async function invalidateSession(sessionId: string): Promise<void> {
 
 export async function invalidateAllUserSessions(userId: string): Promise<void> {
 	await executeQuery('DELETE FROM sessions WHERE user_id = ?', [userId] as InArgs);
+}
+
+// Email verification functions
+export async function createEmailVerificationToken(userId: string, email: string): Promise<string> {
+	const tokenId = generateId();
+	const expiresAt = Math.floor(Date.now() / 1000) + (24 * 60 * 60); // 24 hours
+	const now = Math.floor(Date.now() / 1000);
+
+	// Delete existing tokens for this user
+	await executeQuery('DELETE FROM email_verification_tokens WHERE user_id = ?', [userId] as InArgs);
+
+	// Create new token
+	await executeQuery(
+		'INSERT INTO email_verification_tokens (id, user_id, email, expires_at, created_at) VALUES (?, ?, ?, ?, ?)',
+		[tokenId, userId, email.toLowerCase(), expiresAt, now] as InArgs
+	);
+
+	return tokenId;
+}
+
+export async function validateEmailVerificationToken(tokenId: string): Promise<{userId: string; email: string} | null> {
+	const now = Math.floor(Date.now() / 1000);
+
+	// Delete expired tokens first
+	await executeQuery('DELETE FROM email_verification_tokens WHERE expires_at <= ?', [now] as InArgs);
+
+	const result = await executeQuery(
+		'SELECT user_id, email FROM email_verification_tokens WHERE id = ? AND expires_at > ?',
+		[tokenId, now] as InArgs
+	);
+
+	if (result.rows.length === 0) {
+		return null;
+	}
+
+	const row = result.rows[0];
+	return {
+		userId: row[0] as string,
+		email: row[1] as string
+	};
+}
+
+export async function markEmailAsVerified(userId: string): Promise<void> {
+	const now = Math.floor(Date.now() / 1000);
+
+	await executeQuery(
+		'UPDATE users SET email_verified = 1, updated_at = ? WHERE id = ?',
+		[now, userId] as InArgs
+	);
+
+	// Delete all verification tokens for this user
+	await executeQuery('DELETE FROM email_verification_tokens WHERE user_id = ?', [userId] as InArgs);
+}
+
+// Cookie helpers
+export function setSessionCookie(cookies: any, sessionId: string, expiresAt: Date): void {
+	cookies.set('session', sessionId, {
+		path: '/',
+		httpOnly: true,
+		secure: process.env.NODE_ENV === 'production',
+		sameSite: 'lax',
+		expires: expiresAt
+	});
+}
+
+export function deleteSessionCookie(cookies: any): void {
+	cookies.delete('session', {
+		path: '/'
+	});
 }

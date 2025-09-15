@@ -48,6 +48,15 @@ const en = {
 				avoidCommon: 'Avoid common sequences'
 			}
 		},
+		emailVerification: {
+			title: 'Verify Email',
+			subtitle: 'We sent a verification link to your email',
+			checkEmail: 'Check your inbox',
+			instructions: 'Click the link sent to activate your account. The link expires in 24 hours.',
+			didNotReceive: 'Didn\'t receive the email?',
+			resendEmail: 'Resend email',
+			backToLogin: 'Back to login'
+		},
 		logout: 'Logout'
 	},
 

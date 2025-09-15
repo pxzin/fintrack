@@ -48,6 +48,15 @@ const ptBr = {
 				avoidCommon: 'Evite sequências comuns'
 			}
 		},
+		emailVerification: {
+			title: 'Verificar Email',
+			subtitle: 'Enviamos um link de verificação para seu email',
+			checkEmail: 'Verifique sua caixa de entrada',
+			instructions: 'Clique no link enviado para ativar sua conta. O link expira em 24 horas.',
+			didNotReceive: 'Não recebeu o email?',
+			resendEmail: 'Reenviar email',
+			backToLogin: 'Voltar ao login'
+		},
 		logout: 'Sair'
 	},
 

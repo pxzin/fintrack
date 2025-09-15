@@ -48,6 +48,15 @@ const it = {
 				avoidCommon: 'Evita sequenze comuni'
 			}
 		},
+		emailVerification: {
+			title: 'Verifica Email',
+			subtitle: 'Abbiamo inviato un link di verifica alla tua email',
+			checkEmail: 'Controlla la tua casella di posta',
+			instructions: 'Clicca sul link inviato per attivare il tuo account. Il link scade in 24 ore.',
+			didNotReceive: 'Non hai ricevuto l\'email?',
+			resendEmail: 'Reinvia email',
+			backToLogin: 'Torna al login'
+		},
 		logout: 'Esci'
 	},
 
