@@ -1,6 +1,7 @@
 // Exporta todas as stores automaticamente
 import { theme, resolvedTheme, themeState } from './theme.svelte';
 import { getLocale, currentLocale } from './locale.svelte';
+import { layoutState } from './layout.svelte';
 
 // Registro usado pelo DevStoreInspector. Cada entry pode ser:
 // - um objeto com .subscribe (Svelte store / exported state wrapper)
@@ -11,11 +12,12 @@ export const devStores = {
 	resolvedTheme,
 	themeState,
 	currentLocale,
-	getLocale
+	getLocale,
+	layoutState
 };
 
 // Re-exportações normais para uso do app
-export { themeState, theme, resolvedTheme, getLocale };
+export { themeState, theme, resolvedTheme, getLocale, layoutState };
 
 // Adicione novas stores ao registro `devStores` quando necessário:
 // ex: import { otherState } from './other.svelte'

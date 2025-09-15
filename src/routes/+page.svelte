@@ -58,10 +58,7 @@
 						data-sveltekit-preload-data="hover"
 						class="text-white/70 hover:text-white underline">Component Demo</a
 					>
-					<a
-						href="/api/db-test"
-						class="text-white/70 hover:text-white underline">Database Test</a
-					>
+					<a href="/api/db-test" class="text-white/70 hover:text-white underline">Database Test</a>
 				</div>
 			</div>
 		</div>

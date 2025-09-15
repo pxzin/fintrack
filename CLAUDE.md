@@ -564,3 +564,4 @@ pnpm dev
 3. **Sempre consulte context7** para contexto atualizado do Svelte e outras bibliotecas
 
 - sempre que criar novas tabelas no banco, atualize o inspetor de database de desenvolvimento
+- as stores devem SEMPRE ser $state exportado. Não usar writable e nem nada de svelte/store
