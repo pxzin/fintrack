@@ -1,4 +1,4 @@
-import type { Translation } from '../i18n-types'
+import type { Translation } from '../i18n-types';
 
 const ptBr: Translation = {
 	// === AUTH ===
@@ -162,6 +162,6 @@ const ptBr: Translation = {
 		categoryUpdated: 'Categoria atualizada com sucesso',
 		categoryDeleted: 'Categoria excluída com sucesso'
 	}
-}
+};
 
-export default ptBr
+export default ptBr;

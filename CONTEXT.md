@@ -8,14 +8,14 @@ Você está trabalhando na migração do FinTrack de single-user para multi-user
 
 1. ✅ **Análise completa** do FinTrack atual no repositório `website`
 2. ✅ **Documentação técnica** completa criada (`FINTRACK_DOCUMENTATION.md`)
-3. ✅ **MVP definido** com escopo claro (`MVP_SCOPE.md`) 
+3. ✅ **MVP definido** com escopo claro (`MVP_SCOPE.md`)
 4. ✅ **Projeto SvelteKit** criado com estrutura básica
 5. ⏳ **Próximo:** Setup Turso + Auth
 
 ## 🔄 Status das Tarefas
 
 - [x] Define MVP scope for FinTrack multi-user
-- [x] Create new SvelteKit project structure  
+- [x] Create new SvelteKit project structure
 - [ ] Setup Turso database with multi-user schema
 - [ ] Implement lucia-auth authentication
 - [ ] Migrate core features with user isolation
@@ -31,7 +31,7 @@ npm install zod tailwindcss autoprefixer
 ## 🏗️ Arquitetura Target
 
 - **Full-Stack:** SvelteKit (API routes + frontend)
-- **Database:** Turso (LibSQL) 
+- **Database:** Turso (LibSQL)
 - **Auth:** lucia-auth
 - **Styling:** TailwindCSS
 - **Deploy:** Vercel (free tier)
@@ -41,7 +41,7 @@ npm install zod tailwindcss autoprefixer
 1. **Auth:** Login/Register/Logout
 2. **Accounts:** CRUD com isolamento por usuário
 3. **Categories:** Criação dinâmica com ícones
-4. **Transactions:** Income/Expense com recorrência  
+4. **Transactions:** Income/Expense com recorrência
 5. **Dashboard:** Resumo mensal + saldos
 6. **Projections:** 6 meses à frente
 
@@ -72,6 +72,7 @@ ALTER TABLE transactions ADD COLUMN user_id TEXT NOT NULL REFERENCES users(id);
 ## 🚀 Funcionalidades do FinTrack Original
 
 ### Core Features Analisadas
+
 - **15+ Server Actions** implementadas
 - **Sistema de contas:** 10 tipos (Checking, Savings, Credit Card, etc)
 - **Categorias:** com ícones e busca inteligente
@@ -81,6 +82,7 @@ ALTER TABLE transactions ADD COLUMN user_id TEXT NOT NULL REFERENCES users(id);
 - **Import/Export:** CSV e backup JSON
 
 ### Componentes Mapeados
+
 - `AccountForm`, `CategoryForm`, `TransactionForm`
 - `CurrentMonthSummary`, `ProjectionsCarousel`
 - `TransactionsList`, `FinancePageHeader`
@@ -96,7 +98,7 @@ ALTER TABLE transactions ADD COLUMN user_id TEXT NOT NULL REFERENCES users(id);
 ## ⏱️ Timeline MVP: 4 semanas
 
 - **Semana 1:** Foundation (Auth + DB)
-- **Semana 2:** Core Features 
+- **Semana 2:** Core Features
 - **Semana 3:** Dashboard & UX
 - **Semana 4:** Polish & Launch
 

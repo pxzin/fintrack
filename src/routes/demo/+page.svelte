@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/Button.svelte'
-	
-	let loading = $state(false)
-	
+	import Button from '$lib/components/ui/Button.svelte';
+
+	let loading = $state(false);
+
 	const toggleLoading = () => {
-		loading = !loading
-	}
+		loading = !loading;
+	};
 </script>
 
 <svelte:head>
@@ -18,7 +18,7 @@
 			<h1 class="text-3xl font-bold text-neutral-900 mb-2">Button Component Demo</h1>
 			<p class="text-neutral-600">Based on FinTrack Figma Design System</p>
 		</header>
-		
+
 		<!-- Variants -->
 		<section class="mb-8">
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">Variants</h2>
@@ -30,7 +30,7 @@
 				<Button variant="ghost">Ghost</Button>
 			</div>
 		</section>
-		
+
 		<!-- Sizes -->
 		<section class="mb-8">
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">Sizes</h2>
@@ -40,7 +40,7 @@
 				<Button size="lg" variant="primary">Large</Button>
 			</div>
 		</section>
-		
+
 		<!-- With Icons -->
 		<section class="mb-8">
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">With Icons</h2>
@@ -52,19 +52,19 @@
 				<Button variant="ghost" icon="settings">Settings</Button>
 			</div>
 		</section>
-		
+
 		<!-- States -->
 		<section class="mb-8">
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">States</h2>
 			<div class="flex flex-wrap gap-4">
 				<Button variant="primary" disabled>Disabled</Button>
-				<Button variant="primary" loading={loading} onclick={toggleLoading}>
+				<Button variant="primary" {loading} onclick={toggleLoading}>
 					{loading ? 'Loading...' : 'Toggle Loading'}
 				</Button>
 				<Button variant="success" icon="save" loading>Saving...</Button>
 			</div>
 		</section>
-		
+
 		<!-- Full Width -->
 		<section class="mb-8">
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">Full Width</h2>
@@ -72,7 +72,7 @@
 				<Button variant="primary" fullWidth icon="log-in">Sign In</Button>
 			</div>
 		</section>
-		
+
 		<!-- Financial Actions (Real Use Cases) -->
 		<section class="mb-8">
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">FinTrack Use Cases</h2>
@@ -85,7 +85,7 @@
 				<Button variant="ghost" icon="eye" fullWidth>View Details</Button>
 			</div>
 		</section>
-		
+
 		<!-- Color Showcase -->
 		<section class="mb-8">
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">Figma Color Palette</h2>
@@ -108,7 +108,7 @@
 				</div>
 			</div>
 		</section>
-		
+
 		<!-- Interactive Examples -->
 		<section>
 			<h2 class="text-xl font-semibold text-neutral-900 mb-4">Interactive Examples</h2>
@@ -124,4 +124,3 @@
 		</section>
 	</div>
 </div>
-

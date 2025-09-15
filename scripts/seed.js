@@ -1,11 +1,11 @@
-import { seedDatabase } from '../src/lib/server/seed.js'
+import { seedDatabase } from '../src/lib/server/seed.js';
 
 seedDatabase()
 	.then(() => {
-		console.log('✅ Seed completed successfully')
-		process.exit(0)
+		console.log('✅ Seed completed successfully');
+		process.exit(0);
 	})
 	.catch((error) => {
-		console.error('❌ Seed failed:', error)
-		process.exit(1)
-	})
+		console.error('❌ Seed failed:', error);
+		process.exit(1);
+	});

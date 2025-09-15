@@ -1,4 +1,4 @@
-import type { Translation } from '../i18n-types'
+import type { Translation } from '../i18n-types';
 
 const enUs: Translation = {
 	// === AUTH ===
@@ -162,6 +162,6 @@ const enUs: Translation = {
 		categoryUpdated: 'Category updated successfully',
 		categoryDeleted: 'Category deleted successfully'
 	}
-}
+};
 
-export default enUs
+export default enUs;

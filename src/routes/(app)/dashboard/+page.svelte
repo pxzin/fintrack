@@ -46,8 +46,12 @@
 				<p><strong>Criado em:</strong> {data.user.created_at.toLocaleString('pt-BR')}</p>
 			</div>
 
-			<div class="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-				<h3 class="text-green-800 dark:text-green-400 font-medium mb-2">✅ Sistema de autenticação implementado:</h3>
+			<div
+				class="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg"
+			>
+				<h3 class="text-green-800 dark:text-green-400 font-medium mb-2">
+					✅ Sistema de autenticação implementado:
+				</h3>
 				<ul class="text-sm text-green-700 dark:text-green-300 space-y-1">
 					<li>• Login com email/senha funcionando</li>
 					<li>• Sessões seguras com cookies HttpOnly</li>

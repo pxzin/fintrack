@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { changeLocale, getLocale, getLocaleDisplayName, supportedLocales } from '$lib/stores/locale.svelte.js';
+	import {
+		changeLocale,
+		getLocale,
+		getLocaleDisplayName,
+		supportedLocales
+	} from '$lib/stores/locale.svelte.js';
 	import type { Locales } from '$i18n/i18n-types';
 
 	interface Props {
@@ -19,8 +24,8 @@
 	// Get flag emoji for locale
 	function getLocaleFlag(locale: Locales): string {
 		const flags: Record<Locales, string> = {
-			'en': '🇺🇸',
-			'it': '🇮🇹',
+			en: '🇺🇸',
+			it: '🇮🇹',
 			'pt-br': '🇧🇷',
 			'en-us': '🇺🇸'
 		};
@@ -30,8 +35,8 @@
 	// Get short code for locale
 	function getLocaleCode(locale: Locales): string {
 		const codes: Record<Locales, string> = {
-			'en': 'EN',
-			'it': 'IT',
+			en: 'EN',
+			it: 'IT',
 			'pt-br': 'PT',
 			'en-us': 'EN'
 		};
@@ -49,10 +54,15 @@
 		<i class="i-lucide-chevron-down w-4 h-4"></i>
 	</button>
 
-	<div class="locale-menu hidden absolute right-0 mt-2 w-40 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg z-50">
+	<div
+		class="locale-menu hidden absolute right-0 mt-2 w-40 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg z-50"
+	>
 		{#each supportedLocales as locale}
 			<button
-				class="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 first:rounded-t-lg last:rounded-b-lg transition-colors {locale === currentLocale ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : ''}"
+				class="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 first:rounded-t-lg last:rounded-b-lg transition-colors {locale ===
+				currentLocale
+					? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+					: ''}"
 				onclick={() => handleLocaleChange(locale)}
 			>
 				<span class="text-base">{getLocaleFlag(locale)}</span>

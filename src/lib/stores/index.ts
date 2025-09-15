@@ -7,11 +7,11 @@ import { getLocale, currentLocale } from './locale.svelte';
 // - uma função que retorna o valor atual (ex: getLocale)
 // - um valor qualquer
 export const devStores = {
-  theme,
-  resolvedTheme,
-  themeState,
-  currentLocale,
-  getLocale,
+	theme,
+	resolvedTheme,
+	themeState,
+	currentLocale,
+	getLocale
 };
 
 // Re-exportações normais para uso do app

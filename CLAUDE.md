@@ -411,11 +411,10 @@ src/i18n/
 
 ```svelte
 <script>
-  import LL from '$i18n/i18n-svelte'
+	import LL from '$i18n/i18n-svelte';
 </script>
 
-<h1>{$LL.auth.login.title()}</h1>
-<p>{$LL.errors.minLength({ min: 8 })}</p>
+<h1>{$LL.auth.login.title()}</h1><p>{$LL.errors.minLength({ min: 8 })}</p>
 ```
 
 **2. Em arquivos TypeScript:**

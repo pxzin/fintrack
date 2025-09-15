@@ -17,9 +17,9 @@ FinTrack is a comprehensive financial management platform designed for multi-use
 ## 🛠️ Tech Stack
 
 - **Framework:** SvelteKit 2.37 + Svelte 5.38 (Runes)
-- **Styling:** UnoCSS + Custom Design System  
+- **Styling:** UnoCSS + Custom Design System
 - **Database:** Turso (LibSQL) - SQLite distributed
-- **Auth:** lucia-auth *(coming soon)*
+- **Auth:** lucia-auth _(coming soon)_
 - **Icons:** Lucide via UnoCSS preset
 - **Package Manager:** pnpm
 - **Deploy:** Vercel (free tier)
@@ -30,15 +30,15 @@ Built with a professional color palette extracted from Figma:
 
 - **Primary:** `#4F83FF` (Brand Blue)
 - **Success:** `#10B981` (Completed Green)
-- **Processing:** `#8B5CF6` (Status Purple)  
+- **Processing:** `#8B5CF6` (Status Purple)
 - **Info:** `#06B6D4` (Accent Cyan)
 
 ### Component Library
 
 - ✅ **Button** - 5 variants, 3 sizes, icons, loading states
-- 🚧 **Forms** *(coming soon)*
-- 🚧 **Navigation** *(coming soon)*
-- 🚧 **Cards** *(coming soon)*
+- 🚧 **Forms** _(coming soon)_
+- 🚧 **Navigation** _(coming soon)_
+- 🚧 **Cards** _(coming soon)_
 
 ## 🚀 Getting Started
 
@@ -83,8 +83,9 @@ vercel --prod
 ## 📋 Project Status
 
 ### ✅ Completed (MVP Foundation)
+
 - SvelteKit 5 setup with TypeScript
-- UnoCSS design system implementation  
+- UnoCSS design system implementation
 - Button component with full functionality
 - Design tokens and color palette
 - Development environment setup
@@ -114,7 +115,7 @@ fintrack/
 │   │   ├── demo/             # Component showcase
 │   │   └── (app)/            # Protected app routes
 │   └── app.css               # Global styles
-├── docs/                     # Project documentation  
+├── docs/                     # Project documentation
 ├── uno.config.ts             # UnoCSS configuration
 └── CLAUDE.md                 # Development instructions
 ```
@@ -138,4 +139,4 @@ This project is licensed under the MIT License.
 
 **Next Steps:** Setup Turso database → Implement auth → Migrate core features
 
-🤖 *Generated with [Claude Code](https://claude.ai/code)*
+🤖 _Generated with [Claude Code](https://claude.ai/code)_
