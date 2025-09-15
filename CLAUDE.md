@@ -562,3 +562,4 @@ pnpm dev
    - `console.log` apenas temporariamente durante desenvolvimento
 
 3. **Sempre consulte context7** para contexto atualizado do Svelte e outras bibliotecas
+- sempre que criar novas tabelas no banco, atualize o inspetor de database de desenvolvimento
