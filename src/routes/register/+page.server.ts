@@ -88,7 +88,9 @@ export const actions: Actions = {
 
 			// TODO: Send verification email here
 			console.log(`Verification token for ${email}: ${verificationToken}`);
-			console.log(`Verification URL: ${new URL('/verify-email/' + verificationToken, 'http://localhost:5173').toString()}`);
+			console.log(
+				`Verification URL: ${new URL('/verify-email/' + verificationToken, 'http://localhost:5173').toString()}`
+			);
 
 			// Create session but don't log user in until email is verified
 			// We still create the session so we can track the user through the verification process
@@ -97,7 +99,6 @@ export const actions: Actions = {
 
 			// Redirect to email verification page
 			throw redirect(302, '/verify-email?email=' + encodeURIComponent(email));
-
 		} catch (error) {
 			// Se for redirect, rethrow por propriedades
 			if (

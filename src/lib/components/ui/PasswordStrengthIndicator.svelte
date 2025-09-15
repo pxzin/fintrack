@@ -1,9 +1,6 @@
 <script lang="ts">
 	import LL from '$i18n/i18n-svelte';
-	import {
-		calculatePasswordStrength,
-		type PasswordStrength
-	} from '$lib/utils/password-strength';
+	import { calculatePasswordStrength, type PasswordStrength } from '$lib/utils/password-strength';
 
 	interface Props {
 		password: string;
@@ -95,7 +92,9 @@
 				style="width: 100%; height: 12px; background-color: #e5e7eb; border-radius: 6px; border: 1px solid #d1d5db; overflow: hidden;"
 			>
 				<div
-					style="height: 100%; border-radius: 6px; background-color: {getBarColor(strength.level)}; width: {widthPercentage}%; transition: all 0.3s ease;"
+					style="height: 100%; border-radius: 6px; background-color: {getBarColor(
+						strength.level
+					)}; width: {widthPercentage}%; transition: all 0.3s ease;"
 				></div>
 			</div>
 		</div>

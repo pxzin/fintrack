@@ -17,7 +17,14 @@ export const GET: RequestHandler = async ({ url }) => {
 
 		if (table === 'all') {
 			// Get all tables
-			const tables = ['users', 'sessions', 'email_verification_tokens', 'accounts', 'categories', 'transactions'];
+			const tables = [
+				'users',
+				'sessions',
+				'email_verification_tokens',
+				'accounts',
+				'categories',
+				'transactions'
+			];
 
 			for (const tableName of tables) {
 				try {
@@ -28,7 +35,7 @@ export const GET: RequestHandler = async ({ url }) => {
 					query += ` LIMIT ${limit}`;
 
 					const result = await executeQuery(query);
-					data[tableName] = result.rows.map(row => {
+					data[tableName] = result.rows.map((row) => {
 						// Convert row to object
 						const obj: any = {};
 						result.columns.forEach((column, index) => {
@@ -36,7 +43,7 @@ export const GET: RequestHandler = async ({ url }) => {
 						});
 						return obj;
 					});
-				} catch (error) {
+				} catch (_error) {
 					data[tableName] = [];
 				}
 			}
@@ -44,21 +51,28 @@ export const GET: RequestHandler = async ({ url }) => {
 			// Get specific table
 			try {
 				const result = await executeQuery(`SELECT * FROM ${table} LIMIT ${limit}`);
-				data[table] = result.rows.map(row => {
+				data[table] = result.rows.map((row) => {
 					const obj: any = {};
 					result.columns.forEach((column, index) => {
 						obj[column] = row[index];
 					});
 					return obj;
 				});
-			} catch (error) {
+			} catch (_error) {
 				data[table] = [];
 			}
 		}
 
 		// Get table counts
 		const counts: Record<string, number> = {};
-		const tables = ['users', 'sessions', 'email_verification_tokens', 'accounts', 'categories', 'transactions'];
+		const tables = [
+			'users',
+			'sessions',
+			'email_verification_tokens',
+			'accounts',
+			'categories',
+			'transactions'
+		];
 
 		for (const tableName of tables) {
 			try {
@@ -75,7 +89,6 @@ export const GET: RequestHandler = async ({ url }) => {
 			counts,
 			timestamp: new Date().toISOString()
 		});
-
 	} catch (error) {
 		console.error('Database inspection error:', error);
 		return json(

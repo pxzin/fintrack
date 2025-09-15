@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/Button.svelte';
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 
 	let initLoading = $state(false);
 	let initMessage = $state('');
@@ -66,7 +67,7 @@
 				<Button
 					variant="secondary"
 					class="w-full"
-					onclick={() => goto('/login', { replaceState: true })}
+					onclick={() => goto(`${base}/login`, { replaceState: true })}
 				>
 					Ir para Login
 				</Button>
@@ -74,7 +75,7 @@
 				<Button
 					variant="secondary"
 					class="w-full"
-					onclick={() => goto('/dashboard', { replaceState: true })}
+					onclick={() => goto(`${base}/dashboard`, { replaceState: true })}
 				>
 					Tentar acessar Dashboard (protegido)
 				</Button>

@@ -13,10 +13,11 @@
 		'data-form-type'?: string;
 	}
 
+	/* eslint-disable prefer-const */
 	let {
+		value = $bindable(''),
 		type = 'text',
 		placeholder = '',
-		value = $bindable(''),
 		label,
 		id,
 		name,
@@ -27,6 +28,7 @@
 		'data-form-type': dataFormType,
 		...restProps
 	}: Props = $props();
+	/* eslint-enable prefer-const */
 
 	let focused = $state(false);
 </script>

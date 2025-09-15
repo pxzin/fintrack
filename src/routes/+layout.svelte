@@ -9,11 +9,14 @@
 
 	const { children } = $props();
 
+	// Initialize locale immediately (server and client)
+	initLocale();
+
 	// Initialize theme and locale on mount
-	onMount(async () => {
+	onMount(() => {
 		if (browser) {
-			// Initialize locale
-			await initLocale();
+			// Re-initialize locale on client (might have different preferences)
+			initLocale();
 
 			// Theme is already initialized in the store constructor
 			// but we ensure the class is applied correctly

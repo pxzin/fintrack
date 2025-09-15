@@ -204,7 +204,7 @@ export async function invalidateAllUserSessions(userId: string): Promise<void> {
 // Email verification functions
 export async function createEmailVerificationToken(userId: string, email: string): Promise<string> {
 	const tokenId = generateId();
-	const expiresAt = Math.floor(Date.now() / 1000) + (24 * 60 * 60); // 24 hours
+	const expiresAt = Math.floor(Date.now() / 1000) + 24 * 60 * 60; // 24 hours
 	const now = Math.floor(Date.now() / 1000);
 
 	// Delete existing tokens for this user
@@ -219,11 +219,15 @@ export async function createEmailVerificationToken(userId: string, email: string
 	return tokenId;
 }
 
-export async function validateEmailVerificationToken(tokenId: string): Promise<{userId: string; email: string} | null> {
+export async function validateEmailVerificationToken(
+	tokenId: string
+): Promise<{ userId: string; email: string } | null> {
 	const now = Math.floor(Date.now() / 1000);
 
 	// Delete expired tokens first
-	await executeQuery('DELETE FROM email_verification_tokens WHERE expires_at <= ?', [now] as InArgs);
+	await executeQuery('DELETE FROM email_verification_tokens WHERE expires_at <= ?', [
+		now
+	] as InArgs);
 
 	const result = await executeQuery(
 		'SELECT user_id, email FROM email_verification_tokens WHERE id = ? AND expires_at > ?',
@@ -244,10 +248,10 @@ export async function validateEmailVerificationToken(tokenId: string): Promise<{
 export async function markEmailAsVerified(userId: string): Promise<void> {
 	const now = Math.floor(Date.now() / 1000);
 
-	await executeQuery(
-		'UPDATE users SET email_verified = 1, updated_at = ? WHERE id = ?',
-		[now, userId] as InArgs
-	);
+	await executeQuery('UPDATE users SET email_verified = 1, updated_at = ? WHERE id = ?', [
+		now,
+		userId
+	] as InArgs);
 
 	// Delete all verification tokens for this user
 	await executeQuery('DELETE FROM email_verification_tokens WHERE user_id = ?', [userId] as InArgs);

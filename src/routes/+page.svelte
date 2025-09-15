@@ -45,22 +45,21 @@
 				<div class="flex flex-wrap gap-4 justify-center">
 					<a
 						href="/login"
-						data-sveltekit-preload-data
+						data-sveltekit-preload-data="hover"
 						class="text-white/70 hover:text-white underline">Login Page</a
 					>
 					<a
 						href="/register"
-						data-sveltekit-preload-data
+						data-sveltekit-preload-data="hover"
 						class="text-white/70 hover:text-white underline">Register Page</a
 					>
 					<a
 						href="/demo"
-						data-sveltekit-preload-data
+						data-sveltekit-preload-data="hover"
 						class="text-white/70 hover:text-white underline">Component Demo</a
 					>
 					<a
 						href="/api/db-test"
-						data-sveltekit-preload-data
 						class="text-white/70 hover:text-white underline">Database Test</a
 					>
 				</div>

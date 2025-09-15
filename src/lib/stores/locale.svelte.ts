@@ -1,10 +1,14 @@
 import { browser } from '$app/environment';
 import { setLocale } from '$i18n/i18n-svelte';
+import { loadLocale } from '$i18n/i18n-util.sync';
 import type { Locales } from '$i18n/i18n-types';
 
 // Supported locales
 export const supportedLocales: Locales[] = ['en', 'it', 'pt-br'];
 export const defaultLocale: Locales = 'pt-br';
+
+// Load default locale immediately
+loadLocale(defaultLocale);
 
 // Reactive locale exported state (Svelte 5)
 export const currentLocale = $state<{ value: Locales }>({ value: defaultLocale });
@@ -39,6 +43,8 @@ export function initLocale(locale?: Locales) {
 	const targetLocale = locale || detectLocale();
 
 	try {
+		// Load the locale translations first
+		loadLocale(targetLocale);
 		setLocale(targetLocale);
 		currentLocale.value = targetLocale;
 
@@ -52,6 +58,7 @@ export function initLocale(locale?: Locales) {
 		console.warn(`Failed to load locale ${targetLocale}, falling back to ${defaultLocale}`, error);
 
 		// Fallback to default
+		loadLocale(defaultLocale);
 		setLocale(defaultLocale);
 		currentLocale.value = defaultLocale;
 
@@ -71,6 +78,8 @@ export function changeLocale(newLocale: Locales) {
 	}
 
 	try {
+		// Load the locale translations first
+		loadLocale(newLocale);
 		setLocale(newLocale);
 		currentLocale.value = newLocale;
 

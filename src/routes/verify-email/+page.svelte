@@ -26,9 +26,7 @@
 
 	<!-- Email verification info -->
 	<div class="relative z-10">
-		<div
-			class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-8 w-100 border border-white/20"
-		>
+		<div class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-8 w-100 border border-white/20">
 			<!-- Logo -->
 			<div class="flex justify-center mb-6">
 				<Logo size="md" />
@@ -51,11 +49,17 @@
 
 			<!-- Instructions -->
 			<div class="mb-8">
-				<div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
+				<div
+					class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4"
+				>
 					<div class="flex items-start gap-3">
 						<div class="text-blue-500 flex-shrink-0 mt-0.5">
 							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+								<path
+									fill-rule="evenodd"
+									d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+									clip-rule="evenodd"
+								></path>
 							</svg>
 						</div>
 						<div class="text-sm text-blue-700 dark:text-blue-300">
@@ -70,12 +74,7 @@
 						{$LL.auth.emailVerification.didNotReceive()}
 					</p>
 					<!-- TODO: Add resend verification email functionality -->
-					<Button
-						type="button"
-						variant="secondary"
-						size="sm"
-						disabled={true}
-					>
+					<Button type="button" variant="secondary" size="sm" disabled={true}>
 						{$LL.auth.emailVerification.resendEmail()}
 					</Button>
 				</div>
@@ -85,6 +84,7 @@
 			<div class="text-center">
 				<a
 					href="/login"
+					data-sveltekit-preload-data="hover"
 					class="text-sm text-blue-500 font-medium underline hover:text-blue-600 transition-colors duration-200"
 				>
 					{$LL.auth.emailVerification.backToLogin()}

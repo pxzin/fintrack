@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
+	import { enhance } from '$app/forms';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
 	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
@@ -7,7 +9,6 @@
 	import Logo from '$lib/components/ui/Logo.svelte';
 	import PasswordStrengthIndicator from '$lib/components/ui/PasswordStrengthIndicator.svelte';
 	import LL from '$i18n/i18n-svelte';
-	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import type { ActionData } from './$types';
 
@@ -33,7 +34,7 @@
 
 	// Handle sign in navigation
 	function handleSignIn() {
-		goto('/login');
+		goto(`${base}/login`);
 	}
 
 	function enhanceRegister(): ReturnType<SubmitFunction> {

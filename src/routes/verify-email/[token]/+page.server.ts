@@ -28,7 +28,6 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 
 		// Redirect to dashboard with success message
 		return redirect(302, '/dashboard?verified=true');
-
 	} catch (error) {
 		console.error('Email verification error:', error);
 		return redirect(302, '/verify-email?error=server_error');

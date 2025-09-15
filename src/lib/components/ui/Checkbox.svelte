@@ -7,6 +7,7 @@
 		class?: string;
 	}
 
+	/* eslint-disable prefer-const */
 	let {
 		checked = $bindable(false),
 		label,
@@ -15,6 +16,7 @@
 		class: className = '',
 		...restProps
 	}: Props = $props();
+	/* eslint-enable prefer-const */
 
 	let focused = $state(false);
 </script>

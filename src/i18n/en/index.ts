@@ -1,4 +1,6 @@
-const en = {
+import type { BaseTranslation } from '../i18n-types';
+
+const en: BaseTranslation = {
 	// === AUTH ===
 	auth: {
 		login: {
@@ -53,7 +55,7 @@ const en = {
 			subtitle: 'We sent a verification link to your email',
 			checkEmail: 'Check your inbox',
 			instructions: 'Click the link sent to activate your account. The link expires in 24 hours.',
-			didNotReceive: 'Didn\'t receive the email?',
+			didNotReceive: "Didn't receive the email?",
 			resendEmail: 'Resend email',
 			backToLogin: 'Back to login'
 		},

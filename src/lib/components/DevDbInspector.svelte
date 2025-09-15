@@ -16,7 +16,14 @@
 	let autoRefresh = $state(false);
 	let refreshInterval: ReturnType<typeof setInterval> | null = null;
 
-	const tables = ['users', 'sessions', 'email_verification_tokens', 'accounts', 'categories', 'transactions'];
+	const tables = [
+		'users',
+		'sessions',
+		'email_verification_tokens',
+		'accounts',
+		'categories',
+		'transactions'
+	];
 
 	async function fetchDbData(table = 'all') {
 		if (!dev) return;
@@ -103,7 +110,9 @@
 
 	<!-- Inspector Panel -->
 	{#if isOpen}
-		<div class="fixed bottom-16 right-4 z-50 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-2xl w-[900px] max-h-[600px] overflow-hidden">
+		<div
+			class="fixed bottom-16 right-4 z-50 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-2xl w-[900px] max-h-[600px] overflow-hidden"
+		>
 			<!-- Header -->
 			<div class="bg-red-600 text-white px-4 py-3 flex items-center justify-between">
 				<div class="flex items-center gap-2">
@@ -149,9 +158,11 @@
 				{:else if dbData}
 					<!-- Table Counts Summary -->
 					<div class="mb-4">
-						<h4 class="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">📊 Record Counts:</h4>
+						<h4 class="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
+							📊 Record Counts:
+						</h4>
 						<div class="grid grid-cols-3 gap-2 text-xs">
-							{#each tables as table}
+							{#each tables as table (table)}
 								<div class="flex justify-between p-2 rounded {getTableColor(table)}">
 									<span class="font-medium">{table}:</span>
 									<span class="font-mono">{dbData.counts[table] || 0}</span>
@@ -162,7 +173,10 @@
 
 					<!-- Table Selector -->
 					<div class="mb-4">
-						<label class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-100" for="table-selector">
+						<label
+							class="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-100"
+							for="table-selector"
+						>
 							📋 Select Table:
 						</label>
 						<select
@@ -171,7 +185,7 @@
 							class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 text-sm"
 							onchange={() => fetchDbData(selectedTable)}
 						>
-							{#each tables as table}
+							{#each tables as table (table)}
 								<option value={table}>{table} ({dbData.counts[table] || 0})</option>
 							{/each}
 						</select>
@@ -191,7 +205,7 @@
 								<table class="w-full text-xs border dark:border-gray-600">
 									<thead>
 										<tr class="bg-gray-100 dark:bg-gray-700">
-											{#each columns as column}
+											{#each columns as column (column)}
 												<th class="border dark:border-gray-600 px-2 py-1 text-left font-medium">
 													{column}
 												</th>
@@ -199,14 +213,25 @@
 										</tr>
 									</thead>
 									<tbody>
-										{#each dbData.data[selectedTable] as record, i}
-											<tr class="border-b dark:border-gray-600 {i % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-750'}">
-												{#each columns as column}
-													<td class="border dark:border-gray-600 px-2 py-1 font-mono text-xs max-w-[150px] truncate" title={String(record[column])}>
+										{#each dbData.data[selectedTable] as record, i (record.id || i)}
+											<tr
+												class="border-b dark:border-gray-600 {i % 2 === 0
+													? 'bg-white dark:bg-gray-800'
+													: 'bg-gray-50 dark:bg-gray-750'}"
+											>
+												{#each columns as column (column)}
+													<td
+														class="border dark:border-gray-600 px-2 py-1 font-mono text-xs max-w-[150px] truncate"
+														title={String(record[column])}
+													>
 														{#if column === 'password_hash'}
 															<span class="text-gray-400">***hidden***</span>
 														{:else if column === 'email_verified'}
-															<span class="px-1 py-0.5 rounded text-xs {record[column] ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+															<span
+																class="px-1 py-0.5 rounded text-xs {record[column]
+																	? 'bg-green-100 text-green-800'
+																	: 'bg-red-100 text-red-800'}"
+															>
 																{record[column] ? '✅' : '❌'}
 															</span>
 														{:else}
@@ -228,10 +253,13 @@
 
 					<!-- Raw Data (collapsed by default) -->
 					<details class="mt-4">
-						<summary class="cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
+						<summary
+							class="cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100"
+						>
 							🔍 Raw JSON Data
 						</summary>
-						<pre class="mt-2 bg-gray-100 dark:bg-gray-900 p-3 rounded text-xs overflow-auto max-h-40 text-gray-800 dark:text-gray-200">
+						<pre
+							class="mt-2 bg-gray-100 dark:bg-gray-900 p-3 rounded text-xs overflow-auto max-h-40 text-gray-800 dark:text-gray-200">
 {JSON.stringify(dbData.data[selectedTable], null, 2)}
 						</pre>
 					</details>

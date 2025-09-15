@@ -7,6 +7,7 @@
 		class?: string;
 	}
 
+	/* eslint-disable prefer-const */
 	let {
 		checked = $bindable(false),
 		label,
@@ -15,6 +16,7 @@
 		class: className = '',
 		...restProps
 	}: Props = $props();
+	/* eslint-enable prefer-const */
 </script>
 
 <div class="flex items-center gap-2 {className}">

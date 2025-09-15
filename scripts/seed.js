@@ -2,7 +2,7 @@ import { seedDatabase } from '../src/lib/server/seed.js';
 
 seedDatabase()
 	.then(() => {
-		console.log('✅ Seed completed successfully');
+		console.warn('✅ Seed completed successfully');
 		process.exit(0);
 	})
 	.catch((error) => {

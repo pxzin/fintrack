@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
+	import { enhance } from '$app/forms';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
 	import StyledCheckbox from '$lib/components/ui/StyledCheckbox.svelte';
@@ -7,7 +9,6 @@
 	import LocaleSwitcher from '$lib/components/ui/LocaleSwitcher.svelte';
 	import Logo from '$lib/components/ui/Logo.svelte';
 	import LL from '$i18n/i18n-svelte';
-	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import type { ActionData } from './$types';
 
@@ -25,7 +26,7 @@
 
 	// Handle create account
 	function handleCreateAccount() {
-		goto('/register');
+		goto(`${base}/register`);
 	}
 
 	// Handle forgot password

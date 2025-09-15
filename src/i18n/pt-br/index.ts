@@ -1,4 +1,6 @@
-const ptBr = {
+import type { BaseTranslation } from '../i18n-types';
+
+const ptBr: BaseTranslation = {
 	// === AUTH ===
 	auth: {
 		login: {
