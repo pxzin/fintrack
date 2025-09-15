@@ -1,4 +1,4 @@
-import { createClient, type Client, type InArgs, type InValue } from '@libsql/client';
+import { createClient, type Client, type InArgs } from '@libsql/client';
 import { dev } from '$app/environment';
 
 // Environment variables validation

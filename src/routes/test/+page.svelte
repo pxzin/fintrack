@@ -63,11 +63,19 @@
 					</div>
 				{/if}
 
-				<Button variant="secondary" class="w-full" onclick={() => goto('/login', { replaceState: true })}>
+				<Button
+					variant="secondary"
+					class="w-full"
+					onclick={() => goto('/login', { replaceState: true })}
+				>
 					Ir para Login
 				</Button>
 
-				<Button variant="secondary" class="w-full" onclick={() => goto('/dashboard', { replaceState: true })}>
+				<Button
+					variant="secondary"
+					class="w-full"
+					onclick={() => goto('/dashboard', { replaceState: true })}
+				>
 					Tentar acessar Dashboard (protegido)
 				</Button>
 			</div>

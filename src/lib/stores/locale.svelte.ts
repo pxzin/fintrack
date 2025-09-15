@@ -51,7 +51,7 @@ export async function initLocale(locale?: Locales) {
 
 		return targetLocale;
 	} catch (error) {
-		console.warn(`Failed to load locale ${targetLocale}, falling back to ${defaultLocale}`);
+		console.warn(`Failed to load locale ${targetLocale}, falling back to ${defaultLocale}`, error);
 
 		// Fallback to default
 		await loadLocaleAsync(defaultLocale);

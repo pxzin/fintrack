@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions: Actions = {
 	default: async (event) => {
-		const { request, cookies } = event;
+		const { request } = event;
 		const data = await request.formData();
 		const email = data.get('email')?.toString();
 		const password = data.get('password')?.toString();
@@ -53,7 +53,10 @@ export const actions: Actions = {
 			throw redirect(302, '/dashboard');
 		} catch (error) {
 			// Se for redirect, rethrow por propriedades
-			if ((error as { status?: number; location?: string })?.status === 302 && (error as { status?: number; location?: string })?.location) {
+			if (
+				(error as { status?: number; location?: string })?.status === 302 &&
+				(error as { status?: number; location?: string })?.location
+			) {
 				throw error;
 			}
 			// Só loga erro real

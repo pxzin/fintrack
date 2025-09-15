@@ -3,7 +3,7 @@ import { join } from 'path';
 import { turso } from './db';
 
 export async function runMigrations() {
-	console.log('🔄 Running database migrations...');
+	console.warn('🔄 Running database migrations...');
 
 	try {
 		// Create migrations table if it doesn't exist

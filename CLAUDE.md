@@ -255,6 +255,41 @@ pnpm add -D concurrently
 
 ### Convenções de Código
 
+**IMPORTANTES: Regras Obrigatórias do Svelte 5**
+
+1. **Props em Componentes:**
+   - Para props somente leitura: `const { prop1, prop2 } = $props()`
+   - Para props com $bindable: `let { prop = $bindable() } = $props()` (bindable requer let)
+   - Props normais são somente leitura e devem ser tratadas como `const`
+
+2. **Botões HTML:**
+   - Sempre adicionar `type="button"` ou `type="submit"` em todos os elementos `<button>`
+   - Necessário para conformidade com regras do Svelte
+
+3. **Loops com Keys:**
+   - Sempre usar keys em `{#each}` blocks: `{#each items as item (item.id)}`
+   - Melhora performance e evita bugs de renderização
+
+4. **Evitar Tipos 'any':**
+   - Sempre definir tipos específicos quando possível
+   - Usar `unknown` ao invés de `any` quando o tipo é realmente desconhecido
+   - Para componentes de desenvolvimento (DevStoreInspector), aceitar `any` é permitido
+
+5. **Console.logs:**
+   - Remover `console.log` de código de produção
+   - Usar `console.warn` ou `console.error` apenas para logs importantes
+   - Para debugging em Svelte, preferir `$inspect(variavel)` que é reativo
+   - Exemplo: `$inspect(storeValue)` mostra mudanças em tempo real
+
+6. **Catch Blocks:**
+   - Nunca deixar catch blocks vazios: `catch {}`
+   - Sempre adicionar comentário: `catch { // reason for empty catch }`
+   - Para errors não utilizados: `catch (_error) { }`
+
+7. **Navegação:**
+   - Para links internos, usar `data-sveltekit-preload-data` quando possível
+   - Para `goto()`, considerar usar `{ replaceState: true }` quando apropriado
+
 ## 🛠️ Dev Store Inspector (Desenvolvimento)
 
 Para inspecionar valores das stores em ambiente de desenvolvimento, existe um painel flutuante acessível em todas as rotas.
@@ -497,7 +532,33 @@ pnpm dev
 **Próximo passo:** Setup Turso + Auth implementation
 
 - Sempre que for inserir strings, separar para internacionalização
-- após realizar uma tarefa sempre faça o pnpm check e pnpm lint (se disponível) para verificar falhas
-- após checkar por falhas, peça para que o utilizador verifique por falhas visuais ou no console
-- não rode o comando pnpm dev. O utilizador rodará em terminal separado. Caso necessário, pergunte a ele o que tem no console
-- sempre consulte context7 para o contexto atualizado do svelte
+
+## 🎯 Workflow de Desenvolvimento
+
+### Comandos Obrigatórios após Mudanças
+
+1. **Sempre executar após implementar funcionalidades:**
+
+   ```bash
+   pnpm check    # Verificação TypeScript
+   pnpm lint     # ESLint com correções
+   pnpm format   # Prettier formatting
+   ```
+
+2. **Nunca rode `pnpm dev`** - O utilizador rodará em terminal separado
+3. **Sempre peça** para o utilizador verificar por falhas visuais ou no console após suas modificações
+
+### Regras de Qualidade de Código
+
+1. **Zero Tolerância para:**
+   - Erros TypeScript (`pnpm check` deve passar sem erros)
+   - Catch blocks vazios sem comentários
+   - Botões sem atributo `type`
+   - `{#each}` sem keys
+
+2. **Warnings Aceitáveis:**
+   - `console.warn` e `console.error` em código de server/desenvolvimento
+   - Tipos `any` em componentes de debugging (DevStoreInspector)
+   - `console.log` apenas temporariamente durante desenvolvimento
+
+3. **Sempre consulte context7** para contexto atualizado do Svelte e outras bibliotecas

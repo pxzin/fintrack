@@ -26,13 +26,11 @@
 	// Handle create account
 	function handleCreateAccount() {
 		// TODO: Navigate to sign up page
-		console.log('Navigate to create account');
 	}
 
 	// Handle forgot password
 	function handleForgotPassword() {
 		// TODO: Navigate to forgot password page
-		console.log('Navigate to forgot password');
 	}
 
 	function enhanceLogin(): ReturnType<SubmitFunction> {

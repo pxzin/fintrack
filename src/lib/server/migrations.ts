@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import { turso, executeQuery } from './db.js';
+import { executeQuery } from './db.js';
 
 /**
  * Run database migrations
