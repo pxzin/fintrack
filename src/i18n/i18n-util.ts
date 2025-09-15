@@ -3,10 +3,10 @@
 
 import { i18n as initI18n, i18nObject as initI18nObject, i18nString as initI18nString } from 'typesafe-i18n'
 import type { LocaleDetector } from 'typesafe-i18n/detectors'
-import type { LocaleTranslationFunctions, TranslateByString } from 'typesafe-i18n'
+import type { TranslateByString } from 'typesafe-i18n'
 import { detectLocale as detectLocaleFn } from 'typesafe-i18n/detectors'
 import { initExtendDictionary } from 'typesafe-i18n/utils'
-import type { Formatters, Locales, Translations, TranslationFunctions } from './i18n-types'
+import type { Formatters, Locales, Translations } from './i18n-types'
 
 export const baseLocale: Locales = 'en'
 

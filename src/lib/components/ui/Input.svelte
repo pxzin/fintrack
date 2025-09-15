@@ -5,6 +5,7 @@
 		value?: string;
 		label?: string;
 		id?: string;
+		name?: string;
 		required?: boolean;
 		disabled?: boolean;
 		class?: string;
@@ -16,6 +17,7 @@
 		value = $bindable(''),
 		label,
 		id,
+		name,
 		required = false,
 		disabled = false,
 		class: className = '',
@@ -38,6 +40,7 @@
 			{type}
 			{placeholder}
 			{id}
+			{name}
 			{required}
 			{disabled}
 			class="w-full px-4 py-3 bg-transparent text-gray-900 dark:text-gray-100 border-0 rounded-xl outline-none text-sm placeholder-gray-500 dark:placeholder-gray-400 {disabled ? 'cursor-not-allowed' : ''}"
