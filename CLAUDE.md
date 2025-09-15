@@ -19,12 +19,14 @@ FinTrack é uma aplicação de gestão financeira pessoal sendo migrada de singl
 ## 📋 Status do Projeto
 
 ### ✅ Concluído
+
 - Análise completa do sistema original
 - Documentação técnica (`FINTRACK_DOCUMENTATION.md`)
 - Definição de MVP (`MVP_SCOPE.md`)
 - Setup inicial do SvelteKit
 
 ### ⏳ Próximo
+
 - Setup Turso database
 - Implementação lucia-auth
 - Migração de funcionalidades core
@@ -37,7 +39,7 @@ pnpm dev:full
 
 # Desenvolvimento separado
 pnpm db:start    # Turso com persistência
-pnpm db:dev      # Turso ephemeral  
+pnpm db:dev      # Turso ephemeral
 pnpm dev         # SvelteKit apenas
 
 # Build & Preview
@@ -59,6 +61,7 @@ vercel --prod
 ## 📊 Schema de Banco Multi-usuário
 
 ### Tabelas Core
+
 ```sql
 -- Usuários
 CREATE TABLE users (
@@ -71,7 +74,7 @@ CREATE TABLE users (
 
 -- Sessões (lucia-auth)
 CREATE TABLE sessions (
-  id TEXT PRIMARY KEY,  
+  id TEXT PRIMARY KEY,
   user_id TEXT NOT NULL REFERENCES users(id),
   expires_at INTEGER NOT NULL
 );
@@ -118,34 +121,40 @@ CREATE TABLE transactions (
 ## 🎯 MVP Features
 
 ### 1. Autenticação
+
 - Registro/Login com email + senha
 - Logout com limpeza de sessão
 - Proteção de rotas (middleware)
 - Reset de senha básico
 
 ### 2. Gestão de Contas
+
 - CRUD completo com isolamento por usuário
 - Tipos: Corrente, Poupança, Cartão, Dinheiro
 - Saldos automáticos (inicial + atual)
 
 ### 3. Sistema de Categorias
+
 - Criação dinâmica com ícones
 - Edição/exclusão com validações
 - Categorias padrão no primeiro login
 
 ### 4. Transações Core
+
 - Receitas e despesas
 - Vinculação conta + categoria
 - Transações recorrentes (mensal/anual)
 - Lista paginada com filtros
 
 ### 5. Dashboard Essencial
+
 - Resumo do mês atual
 - Saldos por conta em tempo real
 - Últimas transações
 - Evolução mensal simples
 
 ### 6. Projeções Básicas
+
 - 6 meses à frente baseado em recorrências
 - Visualização em cards
 - Consideração de saldos atuais
@@ -157,7 +166,7 @@ src/
 ├── lib/
 │   ├── server/
 │   │   ├── auth.ts           # lucia-auth setup
-│   │   ├── db.ts             # Turso client  
+│   │   ├── db.ts             # Turso client
 │   │   └── schemas/          # Database schemas
 │   ├── components/
 │   │   ├── ui/               # Base components
@@ -194,14 +203,16 @@ src/
 ## 🎨 Design System (Baseado no Figma)
 
 ### Color Palette
+
 - **Primary:** #4F83FF (azul brand)
 - **Success:** #10B981 (verde completed)
-- **Processing:** #8B5CF6 (roxo processing)  
+- **Processing:** #8B5CF6 (roxo processing)
 - **Info:** #06B6D4 (cyan primary label)
 - **Background Light:** #F8F9FA
 - **Background Dark:** #2E3A52
 
 ### Components Patterns
+
 - **Sidebar:** 256px width, logo + navigation
 - **Cards:** Rounded 8px, shadow-card
 - **Buttons:** Rounded 8px, primary blue
@@ -225,6 +236,7 @@ pnpm add -D concurrently
 ## 🎯 Funcionalidades do Sistema Original
 
 ### Server Actions Implementadas
+
 - `addAccount`, `updateAccount`, `deleteAccount`
 - `addCategory`, `deleteCategory`
 - `addTransaction`, `deleteTransaction`
@@ -233,6 +245,7 @@ pnpm add -D concurrently
 - `importBackup`, `clearAllData`
 
 ### Componentes Mapeados
+
 - `AccountForm`, `CategoryForm`, `TransactionForm`
 - `CurrentMonthSummary`, `ProjectionsCarousel`
 - `TransactionsList`, `FinancePageHeader`
@@ -241,19 +254,38 @@ pnpm add -D concurrently
 ## 💡 Padrões de Desenvolvimento
 
 ### Convenções de Código
-- TypeScript obrigatório
-- Zod para validação de forms
-- Server actions para mutações
-- Component composition pattern
-- Exported states (Svelte 5 runes) para estado global
+
+## 🛠️ Dev Store Inspector (Desenvolvimento)
+
+Para inspecionar valores das stores em ambiente de desenvolvimento, existe um painel flutuante acessível em todas as rotas.
+
+**Como adicionar novas stores ao painel:**
+
+1. Crie sua store normalmente em `src/lib/stores/NOME_DA_STORE.svelte.ts`.
+2. Exporte a store em `src/lib/stores/index.ts` adicionando:
+
+```ts
+export * from './NOME_DA_STORE.svelte';
+```
+
+3. O painel detecta automaticamente todas as stores exportadas pelo índice.
+4. Não é necessário modificar o componente do painel para novas stores.
+5. Para visualizar, rode o projeto em modo desenvolvimento (`pnpm dev`).
+
+**Importante:**
+
+- O painel só aparece em ambiente de desenvolvimento.
+- Use para debug e inspeção rápida dos estados globais.
 
 ### Padrões de Segurança
+
 - Isolamento por usuário em todas queries
 - Validação server-side obrigatória
 - Sanitização de inputs
 - Rate limiting (futuro)
 
 ### Performance
+
 - Lazy loading de componentes
 - Pagination em listas grandes
 - Bundle optimization automático
@@ -262,6 +294,7 @@ pnpm add -D concurrently
 ## 🚫 Limitações MVP
 
 **Funcionalidades adiadas para Fase 2:**
+
 - Sistema de orçamentos/metas
 - Transferências entre contas
 - Sistema de parcelas
@@ -274,12 +307,14 @@ pnpm add -D concurrently
 ## 📈 Métricas de Sucesso
 
 ### Técnicas
+
 - Load time: < 2s primeira visita
 - Bundle size: < 500KB inicial
 - Database queries: < 100ms médio
 - Uptime: > 99%
 
 ### Produto
+
 - Onboarding: < 2min registro → primeira transação
 - Core flow: Adicionar transação em < 30s
 - Data accuracy: 100% consistência de saldos
@@ -288,12 +323,14 @@ pnpm add -D concurrently
 ## 💰 Hospedagem Gratuita
 
 ### Free Tiers Utilizados
+
 - **Turso:** 500MB + 1B reads/mês
 - **Vercel:** 100GB bandwidth/mês
 - **Capacidade:** ~1000 usuários ativos
 - **Escalabilidade:** $5-20/mês para 1K-5K usuários
 
 ### Monitoring Gratuito
+
 - Vercel Analytics (incluído)
 - Sentry free tier (5K errors/mês)
 - Console.log estruturado
@@ -302,14 +339,16 @@ pnpm add -D concurrently
 ## 📋 Critérios de Ready
 
 ### Must Have ✅
+
 - [ ] Login/Logout funcional
 - [ ] CRUD contas isolado por usuário
 - [ ] Transações com categorias
-- [ ] Saldos calculados corretamente  
+- [ ] Saldos calculados corretamente
 - [ ] Deploy automático funcionando
 - [ ] Responsive mobile
 
 ### Nice to Have 🎁
+
 - [ ] Reset password por email
 - [ ] Dark mode toggle
 - [ ] Export básico (JSON)
@@ -324,16 +363,19 @@ pnpm add -D concurrently
 ## 🆘 Troubleshooting Comum
 
 ### Database Issues
+
 - Verificar conexão Turso em `src/lib/server/db.ts`
 - Validar schema com migrations
 - Check user isolation em queries
 
-### Auth Problems  
+### Auth Problems
+
 - Verificar lucia-auth setup
 - Session validation middleware
 - Cookie configuration
 
 ### Performance Issues
+
 - Bundle analyzer: `pnpm build -- --analyze`
 - Database query optimization
 - Component lazy loading
@@ -344,12 +386,14 @@ pnpm add -D concurrently
 ## 🌍 Internacionalização (i18n)
 
 ### ✅ Configuração Completa
+
 - **Library:** typesafe-i18n com adapter Svelte
 - **Idiomas:** Português (Brasil) como padrão + English (US) + Italiano
 - **Type-safety:** Completa com autocomplete no TypeScript
 - **Detecção:** Automática por navegador + persistência em localStorage
 
 ### 📁 Estrutura i18n
+
 ```
 src/i18n/
 ├── en/index.ts           # Traduções em inglês (base locale)
@@ -364,6 +408,7 @@ src/i18n/
 ### 🔧 Como Usar
 
 **1. Em componentes Svelte:**
+
 ```svelte
 <script>
   import LL from '$i18n/i18n-svelte'
@@ -374,18 +419,20 @@ src/i18n/
 ```
 
 **2. Em arquivos TypeScript:**
-```typescript
-import { get } from 'svelte/store'
-import LL from '$i18n/i18n-svelte'
 
-const message = get(LL).auth.login.title()
+```typescript
+import { get } from 'svelte/store';
+import LL from '$i18n/i18n-svelte';
+
+const message = get(LL).auth.login.title();
 ```
 
 **3. Alternando idiomas:**
-```typescript
-import { changeLocale } from '$lib/stores/locale.svelte.js'
 
-await changeLocale('en') // 'pt-br', 'it'
+```typescript
+import { changeLocale } from '$lib/stores/locale.svelte.js';
+
+await changeLocale('en'); // 'pt-br', 'it'
 ```
 
 ### 📝 Convenções de Tradução
@@ -393,6 +440,7 @@ await changeLocale('en') // 'pt-br', 'it'
 **IMPORTANTE: SEMPRE criar strings em todos os idiomas (pt-br, en, it)**
 
 1. **Estrutura hierárquica:**
+
    ```typescript
    auth: {
      login: {
@@ -403,8 +451,9 @@ await changeLocale('en') // 'pt-br', 'it'
    ```
 
 2. **Parâmetros tipados:**
+
    ```typescript
-   minLength: 'Minimum {min:number} characters'
+   minLength: 'Minimum {min:number} characters';
    ```
 
 3. **Organização por feature:**
@@ -440,12 +489,14 @@ pnpm dev
 5. **Sempre** testar alternância de idiomas
 
 ### 🔗 Componentes i18n
+
 - `LocaleSwitcher.svelte` - Alternador de idiomas
 - Integrado com `ThemeToggle` na página de login
 - Persistência automática em localStorage
 - Detecção de idioma do navegador
 
 **Próximo passo:** Setup Turso + Auth implementation
+
 - Sempre que for inserir strings, separar para internacionalização
 - após realizar uma tarefa sempre faça o pnpm check e pnpm lint (se disponível) para verificar falhas
 - após checkar por falhas, peça para que o utilizador verifique por falhas visuais ou no console
