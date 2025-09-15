@@ -34,7 +34,7 @@ export const GET: RequestHandler = async () => {
 		try {
 			const dbInfo = await executeQuery(`SELECT COUNT(*) as user_count FROM users`);
 			userCount = dbInfo.rows[0].user_count as number;
-		} catch (e) {
+		} catch (_e) {
 			console.warn('Could not count users, table might not exist yet');
 		}
 
@@ -45,7 +45,7 @@ export const GET: RequestHandler = async () => {
 				ORDER BY name
 			`);
 			tables = tableInfo.rows.map((row) => row.name as string);
-		} catch (e) {
+		} catch (_e) {
 			console.warn('Could not list tables');
 		}
 

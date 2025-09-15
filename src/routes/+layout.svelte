@@ -7,7 +7,7 @@
 	import { initLocale } from '$lib/stores/locale.svelte.js';
 	import { onMount } from 'svelte';
 
-	let { children } = $props();
+	const { children } = $props();
 
 	// Initialize theme and locale on mount
 	onMount(async () => {

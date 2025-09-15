@@ -1,5 +1,4 @@
 <script lang="ts">
-	import LL from '$i18n/i18n-svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { goto } from '$app/navigation';
 
@@ -64,11 +63,11 @@
 					</div>
 				{/if}
 
-				<Button variant="secondary" class="w-full" onclick={() => goto('/login')}>
+				<Button variant="secondary" class="w-full" onclick={() => goto('/login', { replaceState: true })}>
 					Ir para Login
 				</Button>
 
-				<Button variant="secondary" class="w-full" onclick={() => goto('/dashboard')}>
+				<Button variant="secondary" class="w-full" onclick={() => goto('/dashboard', { replaceState: true })}>
 					Tentar acessar Dashboard (protegido)
 				</Button>
 			</div>

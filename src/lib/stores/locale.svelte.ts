@@ -8,7 +8,7 @@ export const supportedLocales: Locales[] = ['en', 'it', 'pt-br'];
 export const defaultLocale: Locales = 'pt-br';
 
 // Reactive locale exported state (Svelte 5)
-export let currentLocale = $state<{ value: Locales }>({ value: defaultLocale });
+export const currentLocale = $state<{ value: Locales }>({ value: defaultLocale });
 
 // Locale detection and initialization
 export function detectLocale(): Locales {
@@ -83,8 +83,8 @@ export async function changeLocale(newLocale: Locales) {
 		}
 
 		return true;
-	} catch (error) {
-		console.error(`Failed to change locale to ${newLocale}:`, error);
+	} catch (_error) {
+		console.error(`Failed to change locale to ${newLocale}:`, _error);
 		return false;
 	}
 }

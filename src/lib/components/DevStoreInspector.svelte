@@ -5,8 +5,8 @@
 
 	let open = false;
 	let storeValues: Record<string, any> = {};
-	let storeMeta: Record<string, string> = {};
-	let expanded: Record<string, boolean> = {};
+	const storeMeta: Record<string, string> = {};
+	const expanded: Record<string, boolean> = {};
 	const DEFAULT_DEPTH = 2;
 	const unsubscribers: Array<() => void> = [];
 	let pollInterval: number | null = null;
@@ -81,7 +81,7 @@
 									? 'exported-state'
 									: 'value';
 					}
-				} catch (e) {
+				} catch (_e) {
 					// ignore polling errors
 				}
 			}
@@ -92,7 +92,9 @@
 		for (const u of unsubscribers) {
 			try {
 				u();
-			} catch {}
+			} catch {
+				// ignore cleanup errors
+			}
 		}
 		unsubscribers.splice(0, unsubscribers.length);
 		if (pollInterval) {
@@ -133,6 +135,7 @@
 
 {#if dev}
 	<button
+		type="button"
 		class="fixed left-4 bottom-4 z-[9999] bg-[#4F83FF] text-white rounded-lg px-4 py-2 text-sm shadow-md hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-[#4F83FF]/50"
 		on:click={() => (open = !open)}
 		aria-label="Abrir painel de stores"
@@ -147,6 +150,7 @@
 			<div class="flex items-center justify-between mb-3">
 				<h2 class="text-base font-semibold text-[#4F83FF]">Stores (Dev)</h2>
 				<button
+					type="button"
 					class="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-300"
 					on:click={() => {
 						storeValues = {};
@@ -155,7 +159,7 @@
 				>
 			</div>
 			<div class="space-y-3">
-				{#each Object.entries(storeValues) as [key, value]}
+				{#each Object.entries(storeValues) as [key, value] (key)}
 					<section
 						class="border border-gray-100 dark:border-[#1f2937] rounded-md p-2 bg-white dark:bg-[#071028]"
 					>
@@ -167,6 +171,7 @@
 								<span class="text-xs text-gray-500 dark:text-gray-300">{storeMeta[key]}</span>
 							</div>
 							<button
+								type="button"
 								class="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-300"
 								on:click={() => navigator.clipboard?.writeText(JSON.stringify(value))}
 								>Copiar</button
@@ -177,6 +182,7 @@
 								Depth: {DEFAULT_DEPTH}
 							</div>
 							<button
+								type="button"
 								class="text-xs text-gray-500"
 								on:click={() => (expanded[key] = !expanded[key])}
 								>{expanded[key] ? 'Colapsar' : 'Expandir'}</button

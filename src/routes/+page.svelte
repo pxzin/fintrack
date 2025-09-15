@@ -38,9 +38,9 @@
 			<div class="mt-12 space-y-2">
 				<h2 class="text-lg font-semibold text-white/80 mb-4">Development Links</h2>
 				<div class="flex flex-wrap gap-4 justify-center">
-					<a href="/login" class="text-white/70 hover:text-white underline">Login Page</a>
-					<a href="/demo" class="text-white/70 hover:text-white underline">Component Demo</a>
-					<a href="/api/db-test" class="text-white/70 hover:text-white underline">Database Test</a>
+					<a href="/login" data-sveltekit-preload-data class="text-white/70 hover:text-white underline">Login Page</a>
+					<a href="/demo" data-sveltekit-preload-data class="text-white/70 hover:text-white underline">Component Demo</a>
+					<a href="/api/db-test" data-sveltekit-preload-data class="text-white/70 hover:text-white underline">Database Test</a>
 				</div>
 			</div>
 		</div>

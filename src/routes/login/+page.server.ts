@@ -1,7 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { authenticateUser, createSession } from '$lib/server/auth';
-import { setSessionCookie, getCurrentSession } from '$lib/server/session';
+import { setSessionCookie } from '$lib/server/session';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	// Redirect if already authenticated
@@ -11,7 +11,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, cookies }) => {
+	default: async (event) => {
+		const { request, cookies } = event;
 		const data = await request.formData();
 		const email = data.get('email')?.toString();
 		const password = data.get('password')?.toString();
@@ -46,14 +47,13 @@ export const actions: Actions = {
 			const session = await createSession(user.id);
 
 			// Set session cookie
-			const event = { cookies } as any;
 			setSessionCookie(event, session.id, session.expires_at);
 
 			// ...existing code...
 			throw redirect(302, '/dashboard');
 		} catch (error) {
 			// Se for redirect, rethrow por propriedades
-			if ((error as any)?.status === 302 && (error as any)?.location) {
+			if ((error as { status?: number; location?: string })?.status === 302 && (error as { status?: number; location?: string })?.location) {
 				throw error;
 			}
 			// Só loga erro real

@@ -6,7 +6,7 @@
 		size?: 'sm' | 'md' | 'lg';
 	}
 
-	let { class: className = '', size = 'md' }: Props = $props();
+	const { class: className = '', size = 'md' }: Props = $props();
 
 	const sizeClasses = {
 		sm: 'w-8 h-8',

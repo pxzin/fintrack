@@ -3,8 +3,8 @@ import { browser } from '$app/environment';
 export type Theme = 'light' | 'dark' | 'system';
 
 // exported state must not be reassigned; use objects and mutate .value
-export let theme = $state<{ value: Theme }>({ value: 'system' });
-export let resolvedTheme = $state<{ value: 'light' | 'dark' }>({
+export const theme = $state<{ value: Theme }>({ value: 'system' });
+export const resolvedTheme = $state<{ value: 'light' | 'dark' }>({
 	value: 'light'
 });
 
@@ -23,7 +23,9 @@ export function setTheme(t: Theme) {
 	if (browser) {
 		try {
 			localStorage.setItem('theme', t);
-		} catch {}
+		} catch {
+			// Empty catch - localStorage não disponível
+		}
 	}
 	if (browser) updateResolvedFromTheme();
 	applyTheme();
@@ -48,7 +50,9 @@ if (browser) {
 		if (saved && (saved === 'light' || saved === 'dark' || saved === 'system')) {
 			theme.value = saved;
 		}
-	} catch {}
+	} catch {
+		// Empty catch - localStorage não disponível
+	}
 
 	const mq = window.matchMedia('(prefers-color-scheme: dark)');
 	const mqHandler = () => updateResolvedFromTheme();

@@ -4,7 +4,7 @@
 		class?: string;
 	}
 
-	let { size = 'md', class: className = '' }: Props = $props();
+	const { size = 'md', class: className = '' }: Props = $props();
 
 	const sizeClasses = {
 		sm: 'text-lg',

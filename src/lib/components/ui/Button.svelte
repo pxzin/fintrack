@@ -11,7 +11,7 @@
 		fullWidth?: boolean;
 	}
 
-	let {
+	const {
 		variant = 'primary',
 		size = 'md',
 		loading = false,

@@ -8,13 +8,14 @@
 	import Logo from '$lib/components/ui/Logo.svelte';
 	import LL from '$i18n/i18n-svelte';
 	import { enhance } from '$app/forms';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import type { ActionData } from './$types';
 
 	interface Props {
 		form?: ActionData;
 	}
 
-	let { form }: Props = $props();
+	const { form }: Props = $props();
 
 	// Form state
 	let email = $state(form?.email || '');
@@ -34,15 +35,15 @@
 		console.log('Navigate to forgot password');
 	}
 
-	function enhanceLogin() {
+	function enhanceLogin(): ReturnType<SubmitFunction> {
 		loading = true;
 		return async ({ update, result }) => {
 			if (result.type === 'redirect' && result.status === 302 && result.location) {
-				await goto(result.location);
+				await goto(result.location, { replaceState: true });
 				return;
 			}
 			if (typeof update === 'function') {
-				await update(result);
+				await update();
 			}
 			loading = false;
 		};
@@ -83,7 +84,7 @@
 				<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
 					{$LL.auth.login.subtitle()}
 				</p>
-				{#if form?.error && form.status !== 302}
+				{#if form?.error}
 					<div
 						class="mt-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
 					>
