@@ -1,6 +1,6 @@
-import type { Translation } from '../i18n-types'
+import type { BaseTranslation } from '../i18n-types';
 
-const it: Translation = {
+const it: BaseTranslation = {
 	// === AUTH ===
 	auth: {
 		login: {
@@ -21,9 +21,43 @@ const it: Translation = {
 			subtitle: 'Compila i dettagli per creare il tuo account',
 			nameLabel: 'Nome completo:',
 			namePlaceholder: 'Inserisci il tuo nome completo',
+			emailLabel: 'Indirizzo email:',
+			emailPlaceholder: 'tua.email@esempio.it',
+			passwordLabel: 'Password:',
+			passwordPlaceholder: 'Inserisci una password sicura',
+			confirmPasswordLabel: 'Conferma password:',
+			confirmPasswordPlaceholder: 'Inserisci nuovamente la password',
 			signUpButton: 'Registrati',
 			hasAccount: 'Hai già un account?',
 			signIn: 'Accedi'
+		},
+		password: {
+			strength: {
+				title: 'Forza della password',
+				levels: {
+					veryWeak: 'Molto debole',
+					weak: 'Debole',
+					moderate: 'Moderata',
+					strong: 'Forte',
+					veryStrong: 'Molto forte'
+				}
+			},
+			feedback: {
+				minLength: 'Usa almeno 8 caratteri',
+				mixedCase: 'Usa lettere maiuscole e minuscole',
+				includeNumbers: 'Includi numeri',
+				includeSymbols: 'Includi simboli (!@#$%)',
+				avoidCommon: 'Evita sequenze comuni'
+			}
+		},
+		emailVerification: {
+			title: 'Verifica Email',
+			subtitle: 'Abbiamo inviato un link di verifica alla tua email',
+			checkEmail: 'Controlla la tua casella di posta',
+			instructions: 'Clicca sul link inviato per attivare il tuo account. Il link scade in 24 ore.',
+			didNotReceive: "Non hai ricevuto l'email?",
+			resendEmail: 'Reinvia email',
+			backToLogin: 'Torna al login'
 		},
 		logout: 'Esci'
 	},
@@ -147,7 +181,9 @@ const it: Translation = {
 		networkError: 'Errore di rete',
 		serverError: 'Errore del server',
 		unauthorized: 'Non autorizzato',
-		notFound: 'Non trovato'
+		notFound: 'Non trovato',
+		passwordMismatch: 'Le password non corrispondono',
+		weakPassword: 'La password è troppo debole'
 	},
 
 	// === SUCCESS MESSAGES ===
@@ -162,6 +198,6 @@ const it: Translation = {
 		categoryUpdated: 'Categoria aggiornata con successo',
 		categoryDeleted: 'Categoria eliminata con successo'
 	}
-}
+} as const;
 
-export default it
+export default it;

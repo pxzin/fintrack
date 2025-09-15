@@ -1,7 +1,7 @@
 {
-  "adapter": "svelte",
-  "baseLocale": "en",
-  "outputPath": "./src/i18n/",
-  "tempPath": "./src/i18n/temp/",
-  "$schema": "https://unpkg.com/typesafe-i18n@5.26.2/schema/typesafe-i18n.json"
+	"adapter": "svelte",
+	"baseLocale": "en",
+	"outputPath": "./src/i18n/",
+	"tempPath": "./src/i18n/temp/",
+	"$schema": "https://unpkg.com/typesafe-i18n@5.26.2/schema/typesafe-i18n.json"
 }

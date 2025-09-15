@@ -1,23 +1,23 @@
-import { createClient, type Client, type InArgs, type InValue } from '@libsql/client'
-import { dev } from '$app/environment'
+import { createClient, type Client, type InArgs } from '@libsql/client';
+import { dev } from '$app/environment';
 
 // Environment variables validation
-const DATABASE_URL = process.env.TURSO_DATABASE_URL
-const AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN
+const DATABASE_URL = process.env.TURSO_DATABASE_URL;
+const AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN;
 
 if (!DATABASE_URL) {
-	throw new Error('TURSO_DATABASE_URL environment variable is required')
+	throw new Error('TURSO_DATABASE_URL environment variable is required');
 }
 
 if (!AUTH_TOKEN && !dev) {
-	throw new Error('TURSO_AUTH_TOKEN environment variable is required in production')
+	throw new Error('TURSO_AUTH_TOKEN environment variable is required in production');
 }
 
 // Create Turso client
 export const turso: Client = createClient({
 	url: DATABASE_URL,
 	authToken: AUTH_TOKEN
-})
+});
 
 /**
  * Execute a query with parameters
@@ -30,11 +30,11 @@ export async function executeQuery(sql: string, params: InArgs = []) {
 		const result = await turso.execute({
 			sql,
 			args: params
-		})
-		return result
+		});
+		return result;
 	} catch (error) {
-		console.error('Database query error:', error)
-		throw error
+		console.error('Database query error:', error);
+		throw error;
 	}
 }
 
@@ -43,20 +43,18 @@ export async function executeQuery(sql: string, params: InArgs = []) {
  * @param queries Array of {sql, params} objects
  * @returns Transaction result
  */
-export async function executeTransaction(
-	queries: Array<{ sql: string; params?: InArgs }>
-) {
+export async function executeTransaction(queries: Array<{ sql: string; params?: InArgs }>) {
 	try {
 		const transaction = await turso.batch(
 			queries.map(({ sql, params = [] }) => ({
 				sql,
 				args: params
 			}))
-		)
-		return transaction
+		);
+		return transaction;
 	} catch (error) {
-		console.error('Database transaction error:', error)
-		throw error
+		console.error('Database transaction error:', error);
+		throw error;
 	}
 }
 
@@ -65,11 +63,11 @@ export async function executeTransaction(
  */
 export async function testConnection(): Promise<boolean> {
 	try {
-		await turso.execute('SELECT 1')
-		return true
+		await turso.execute('SELECT 1');
+		return true;
 	} catch (error) {
-		console.error('Database connection failed:', error)
-		return false
+		console.error('Database connection failed:', error);
+		return false;
 	}
 }
 
@@ -78,8 +76,33 @@ export async function testConnection(): Promise<boolean> {
  */
 export async function closeConnection() {
 	try {
-		turso.close()
+		turso.close();
 	} catch (error) {
-		console.error('Error closing database connection:', error)
+		console.error('Error closing database connection:', error);
 	}
+}
+
+// Database types for authentication
+export interface User {
+	id: string;
+	email: string;
+	password_hash: string;
+	full_name: string;
+	email_verified: number;
+	created_at: string;
+	updated_at: string;
+}
+
+export interface Session {
+	id: string;
+	user_id: string;
+	expires_at: number;
+}
+
+export interface EmailVerificationToken {
+	id: string;
+	user_id: string;
+	email: string;
+	expires_at: number;
+	created_at: string;
 }

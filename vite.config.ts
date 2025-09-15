@@ -6,10 +6,7 @@ export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
 
 	return {
-		plugins: [
-			UnoCSS(),
-			sveltekit()
-		],
+		plugins: [UnoCSS(), sveltekit()],
 		ssr: {
 			noExternal: ['typesafe-i18n']
 		},
@@ -18,5 +15,5 @@ export default defineConfig(({ mode }) => {
 			'process.env.TURSO_AUTH_TOKEN': JSON.stringify(env.TURSO_AUTH_TOKEN),
 			'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV)
 		}
-	}
+	};
 });

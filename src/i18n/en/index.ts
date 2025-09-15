@@ -1,4 +1,4 @@
-import type { BaseTranslation } from '../i18n-types'
+import type { BaseTranslation } from '../i18n-types';
 
 const en: BaseTranslation = {
 	// === AUTH ===
@@ -21,9 +21,43 @@ const en: BaseTranslation = {
 			subtitle: 'Fill in the details to create your account',
 			nameLabel: 'Full name:',
 			namePlaceholder: 'Enter your full name',
+			emailLabel: 'Email address:',
+			emailPlaceholder: 'your.email@example.com',
+			passwordLabel: 'Password:',
+			passwordPlaceholder: 'Enter a secure password',
+			confirmPasswordLabel: 'Confirm password:',
+			confirmPasswordPlaceholder: 'Enter password again',
 			signUpButton: 'Sign Up',
 			hasAccount: 'Already have an account?',
 			signIn: 'Sign In'
+		},
+		password: {
+			strength: {
+				title: 'Password strength',
+				levels: {
+					veryWeak: 'Very weak',
+					weak: 'Weak',
+					moderate: 'Moderate',
+					strong: 'Strong',
+					veryStrong: 'Very strong'
+				}
+			},
+			feedback: {
+				minLength: 'Use at least 8 characters',
+				mixedCase: 'Use uppercase and lowercase letters',
+				includeNumbers: 'Include numbers',
+				includeSymbols: 'Include symbols (!@#$%)',
+				avoidCommon: 'Avoid common sequences'
+			}
+		},
+		emailVerification: {
+			title: 'Verify Email',
+			subtitle: 'We sent a verification link to your email',
+			checkEmail: 'Check your inbox',
+			instructions: 'Click the link sent to activate your account. The link expires in 24 hours.',
+			didNotReceive: "Didn't receive the email?",
+			resendEmail: 'Resend email',
+			backToLogin: 'Back to login'
 		},
 		logout: 'Logout'
 	},
@@ -147,7 +181,9 @@ const en: BaseTranslation = {
 		networkError: 'Network error',
 		serverError: 'Server error',
 		unauthorized: 'Unauthorized',
-		notFound: 'Not found'
+		notFound: 'Not found',
+		passwordMismatch: 'Passwords do not match',
+		weakPassword: 'Password is too weak'
 	},
 
 	// === SUCCESS MESSAGES ===
@@ -162,6 +198,6 @@ const en: BaseTranslation = {
 		categoryUpdated: 'Category updated successfully',
 		categoryDeleted: 'Category deleted successfully'
 	}
-}
+} as const;
 
-export default en
+export default en;

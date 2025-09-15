@@ -9,20 +9,26 @@
 		required?: boolean;
 		disabled?: boolean;
 		class?: string;
+		autocomplete?: HTMLInputElement['autocomplete'];
+		'data-form-type'?: string;
 	}
 
+	/* eslint-disable prefer-const */
 	let {
+		value = $bindable(''),
 		type = 'text',
 		placeholder = '',
-		value = $bindable(''),
 		label,
 		id,
 		name,
 		required = false,
 		disabled = false,
 		class: className = '',
+		autocomplete,
+		'data-form-type': dataFormType,
 		...restProps
 	}: Props = $props();
+	/* eslint-enable prefer-const */
 
 	let focused = $state(false);
 </script>
@@ -34,7 +40,11 @@
 		</label>
 	{/if}
 
-	<div class="relative bg-gray-100 dark:bg-slate-700 rounded-xl border-0 transition-all hover:bg-gray-200 dark:hover:bg-slate-600 {focused ? 'bg-gray-100 dark:bg-slate-700 ring-2 ring-blue-500/20' : ''} {disabled ? 'opacity-60 cursor-not-allowed' : ''}">
+	<div
+		class="relative bg-gray-100 dark:bg-slate-700 rounded-xl border-0 transition-all hover:bg-gray-200 dark:hover:bg-slate-600 {focused
+			? 'bg-gray-100 dark:bg-slate-700 ring-2 ring-blue-500/20'
+			: ''} {disabled ? 'opacity-60 cursor-not-allowed' : ''}"
+	>
 		<input
 			bind:value
 			{type}
@@ -43,9 +53,13 @@
 			{name}
 			{required}
 			{disabled}
-			class="w-full px-4 py-3 bg-transparent text-gray-900 dark:text-gray-100 border-0 rounded-xl outline-none text-sm placeholder-gray-500 dark:placeholder-gray-400 {disabled ? 'cursor-not-allowed' : ''}"
-			onfocus={() => focused = true}
-			onblur={() => focused = false}
+			{autocomplete}
+			data-form-type={dataFormType}
+			class="w-full px-4 py-3 bg-transparent text-gray-900 dark:text-gray-100 border-0 rounded-xl outline-none text-sm placeholder-gray-500 dark:placeholder-gray-400 {disabled
+				? 'cursor-not-allowed'
+				: ''}"
+			onfocus={() => (focused = true)}
+			onblur={() => (focused = false)}
 			{...restProps}
 		/>
 	</div>
